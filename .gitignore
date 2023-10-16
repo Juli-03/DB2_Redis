@@ -9,3 +9,4 @@ dokumentation.pdf
 *.orig
 *compile.log
 *.DS_Store
+*.log
