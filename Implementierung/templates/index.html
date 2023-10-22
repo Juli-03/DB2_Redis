@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redis Test</title>
+</head>
+<body>
+    <h1>Redis Test</h1>
+    <form action="/set" method="post">
+        Key: <input type="text" name="key" required>
+        Value: <input type="text" name="value" required>
+        <button type="submit">Set Key-Value Pair</button>
+    </form>
+    <h2>Keys in Redis:</h2>
+    <ul>
+        {% for key in keys %}
+        <li><a href="{{ url_for('get_key', key=key.decode('utf-8')) }}">{{ key.decode('utf-8') }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        // Reload the page every 10 seconds (adjust the interval as needed).
+        setInterval(function() {
+            location.reload();
+        }, 10000); // 10000 milliseconds = 10 seconds
+    </script>
+</body>
+</html>

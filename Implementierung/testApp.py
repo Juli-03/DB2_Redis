@@ -1,4 +1,8 @@
 from flask import Flask, render_template
+import redis
+
+pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
+redis = redis.Redis(connection_pool=pool)
 
 app = Flask(__name__)
 
