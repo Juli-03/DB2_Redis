@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\User\Documents\GitHub\DB2_Redis\Implementierung\venv"
+VIRTUAL_ENV="C:\Users\timst\Documents\GitHub\DB2_Redis\Implementierung\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
