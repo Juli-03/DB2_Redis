@@ -32,6 +32,7 @@ def login():
                 # If login is successful, redirect the user to the "home" route
                 return redirect(url_for('chat.home'))
         # If login is not successful, redirect the user to the "login" route
+        # TODO: show error message
         return redirect(url_for('login.login'))
     else:
         return render_template('login.html')

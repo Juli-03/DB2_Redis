@@ -11,5 +11,5 @@ redis = redis.StrictRedis(host='localhost', port=6379, db=0)
 @chat_bp.route('/home')
 def home():
     # test
-    email = redis.get('active_email')
-    return render_template('chat.html', active_email=email.decode('utf-8'))
+    active_user_id = redis.get('active_user_id')
+    return render_template('chat.html', active_user_id=active_user_id.decode('utf-8'))
