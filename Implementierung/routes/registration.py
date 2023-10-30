@@ -24,9 +24,8 @@ def register():
         redis.hset(f'user:{reg_user_id}', 'username', reg_username)
         redis.hset(f'user:{reg_user_id}', 'password', reg_password)
 
-        # save email and password of active user in redis db
-        redis.set('active_email', reg_email)
-        redis.set('active_password', reg_password)
+        # save active user id in redis db
+        redis.set('active_user_id', reg_user_id)
 
         # If registration is successful, redirect the user to the "home" route
         return redirect(url_for('chat.home'))

@@ -15,10 +15,23 @@ def login():
         # get entered email and password
         email = request.form['email']
         password = request.form['password']
-        # save email and password of active user in redis db
-        redis.set('active_email', email)
-        redis.set('active_password', password)
-        # If login is successful, redirect the user to the "home" route
-        return redirect(url_for('chat.home'))
+
+        # get number of users from database
+        number_of_users = redis.get('user_id_counter')
+
+        # loop through all users
+        for user_id in range(1, int(number_of_users) + 1):
+            # get email and password from database
+            db_email = redis.hget(f'user:{user_id}', 'email')
+            db_password = redis.hget(f'user:{user_id}', 'password')
+
+            # compare entered email and password with database
+            if email == db_email.decode('utf-8') and password == db_password.decode('utf-8'):
+                # save active user id in redis db
+                redis.set('active_user_id', user_id)
+                # If login is successful, redirect the user to the "home" route
+                return redirect(url_for('chat.home'))
+        # If login is not successful, redirect the user to the "login" route
+        return redirect(url_for('login.login'))
     else:
         return render_template('login.html')
