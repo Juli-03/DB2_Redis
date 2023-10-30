@@ -1,35 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for
+from config import Config
+from routes.chat import chat_bp
+from routes.login import login_bp
+from routes.registration import registration_bp
 
-app = Flask(__name__,static_folder='staticFiles')
+# connection to database
+pool = Config.pool
+redis = Config.redis
 
-# route to registration form
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        # Process the form data here
-        # Perform registration and any necessary validation
+# create flask app
+app = Flask(__name__,static_folder='staticFiles', template_folder='templates')
 
-        # If registration is successful, redirect the user to the "home" route
-        return redirect(url_for('home'))
-    else:
-        return render_template('registration.html')
+# register blueprints
+app.register_blueprint(chat_bp)
+app.register_blueprint(login_bp)
+app.register_blueprint(registration_bp)
 
-# route to login form -> is set to default route, so user has always to login first
-@app.route('/', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        # Process the form data here
-        # Perform login and any necessary validation
-
-        # If login is successful, redirect the user to the "home" route
-        return redirect(url_for('home'))
-    else:
-        return render_template('login.html')
-
-# home route is the chatroom
-@app.route('/home')
-def home():
-    return render_template('chat.html')
-
+# default route = run app
 if __name__ == '__main__':
     app.run(debug=True)

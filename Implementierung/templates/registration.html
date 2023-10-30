@@ -9,15 +9,15 @@
 <body>
   <div class="wrapper">
     <h2>Registrierung</h2>
-    <form action="{{ url_for('register') }}" method="POST">
+    <form action="{{ url_for('registration.register') }}" method="POST">
       <div class="input-box">
-        <input type="text" placeholder="Name eingeben" required>
+        <input type="text" placeholder="Name eingeben" name="reg_username" id="reg_username" required>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="E-Mail eingeben" required>
+        <input type="text" placeholder="E-Mail eingeben" name="reg_email" id="reg_email" required>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Passwort" required>
+        <input type="password" placeholder="Passwort" name="reg_password" id="reg_password" required>
       </div>
       <div class="input-box">
         <input type="password" placeholder="Passwort wiederholen" required>
@@ -30,7 +30,7 @@
         <input type="Submit" value="Registrieren">
       </div>
       <div class="text">
-        <h3>Haben Sie bereits einen Account? <a href="{{ url_for('login') }}">einloggen</a></h3>
+        <h3>Haben Sie bereits einen Account? <a href="{{ url_for('login.login') }}">einloggen</a></h3>
       </div>
     </form>
   </div>
