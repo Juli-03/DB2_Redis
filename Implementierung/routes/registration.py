@@ -18,22 +18,25 @@ def register():
         reg_username = request.form['reg_username']
         reg_password = request.form['reg_password']
 
-        # get number of users from database
-        number_of_users = redis.get('user_id_counter')
-
-        # loop through all users
-        for user_id in range(1, int(number_of_users) + 1):
-            # get email from database
-            db_email = redis.hget(f'user:{user_id}', 'email')
-
-            # compare entered email and password with database
-            # check if account already exists
-            if reg_email == db_email.decode('utf-8'):
+        # Check if the user id counter already exists
+        if not redis.exists('user_id_counter'):
+            # If the key does not exist, initialize it with a default value
+            redis.set('user_id_counter', 0)
+        # user id counter already exists
+        else:
+            # check if email already exists
+            user_id = int(redis.zscore("user_emails", reg_email))
+            # email already exists
+            if user_id is not None:
                 # If registration is not successful, redirect the user to the "register" route
                 # TODO: show error message
                 return redirect(url_for('registration.register'))
 
+        # get new user id (increment user_id_counter by 1)
         reg_user_id = redis.incr('user_id_counter')
+
+        # Add the email to the ZSET with the user_id as the score
+        redis.zadd("user_emails", {reg_email: reg_user_id})
 
         # create HSET
         redis.hset(f'user:{reg_user_id}', 'email', reg_email)
