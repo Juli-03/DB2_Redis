@@ -1,5 +1,6 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 import redis
+import json
 
 # register page as blueprint
 registration_bp = Blueprint('registration', __name__)
@@ -25,7 +26,7 @@ def register():
         # user id counter already exists
         else:
             # check if email already exists
-            user_id = int(redis.zscore("user_emails", reg_email))
+            user_id = redis.zscore("user_emails", reg_email)
             # email already exists
             if user_id is not None:
                 # If registration is not successful, redirect the user to the "register" route
@@ -37,11 +38,15 @@ def register():
 
         # Add the email to the ZSET with the user_id as the score
         redis.zadd("user_emails", {reg_email: reg_user_id})
-
-        # create HSET
-        redis.hset(f'user:{reg_user_id}', 'email', reg_email)
-        redis.hset(f'user:{reg_user_id}', 'username', reg_username)
-        redis.hset(f'user:{reg_user_id}', 'password', reg_password)
+        
+        # save user data in form of a json object
+        user_data = {
+            'email': reg_email,
+            'username': reg_username,
+            'password': reg_password
+        }
+        # save user data in redis db as stringified json object
+        redis.hset("users", reg_user_id, json.dumps(user_data))
 
         # save active user id in redis db
         redis.set('active_user_id', reg_user_id)

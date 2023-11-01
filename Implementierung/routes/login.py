@@ -30,7 +30,6 @@ def login():
                 return redirect(url_for('login.login'))
             # email exists -> check password
             else:
-                print(user_id)
                 # get password from database
                 db_password = redis.hget(f'user:{user_id}', 'password')
                 # compare entered password with database
