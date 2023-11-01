@@ -1,5 +1,6 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 import redis
+import json
 
 # register page as blueprint
 login_bp = Blueprint('login', __name__)
@@ -30,10 +31,15 @@ def login():
                 return redirect(url_for('login.login'))
             # email exists -> check password
             else:
+                # get user data from database as json object
+                user_data_json = redis.hget("users", user_id)
+                if user_data_json is not None:
+                    # convert json object to python dictionary
+                    user_data = json.loads(user_data_json)
                 # get password from database
-                db_password = redis.hget(f'user:{user_id}', 'password')
+                db_password = user_data['password']
                 # compare entered password with database
-                if password == db_password.decode('utf-8'):
+                if password == db_password:
                     # save active user id in redis db
                     redis.set('active_user_id', user_id)
                     # If login is successful, redirect the user to the "home" route
