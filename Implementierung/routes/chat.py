@@ -12,18 +12,18 @@ redis = redis.StrictRedis(host='localhost', port=6379, db=0)
 # home route is the chatroom
 @chat_bp.route('/home', methods=['GET', 'POST'])
 def home():
+    # get user id from url
+    user_id = request.args.get('user_id')
     if request.method == 'POST':
         # get message from input field
         message = request.form['message']
-        # get active user id
-        active_user_id = redis.get('active_user_id')
         # get current timestamp
         timestamp = int(time.time())
         # TODO: get actual room ID!!!!
         room_id = '1:2'
         # message for stringified json object
         message_data = {
-            'from': active_user_id.decode('utf-8'), 
+            'from': user_id, 
             'message': message, 
             'timestamp': timestamp,
             'room_id': room_id
@@ -31,5 +31,4 @@ def home():
         # stringify the json data
         json_data = json.dumps(message_data)
         redis.zadd(f"room:{room_id}", {json_data: timestamp})
-    user_id = request.args.get('user_id')
     return render_template('chat.html', user_id=user_id)

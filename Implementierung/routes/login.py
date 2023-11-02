@@ -40,8 +40,6 @@ def login():
                 db_password = user_data['password']
                 # compare entered password with database
                 if password == db_password:
-                    # save active user id in redis db
-                    redis.set('active_user_id', user_id)
                     # If login is successful, redirect the user to the "home" route
                     return redirect(url_for('chat.home', user_id=user_id))
                 # If login is not successful, redirect the user to the "login" route

@@ -43,15 +43,23 @@ def register():
         user_data = {
             'email': reg_email,
             'username': reg_username,
-            'password': reg_password
+            'password': reg_password,
+            'rooms': [room:1:2, ]
         }
         # save user data in redis db as stringified json object
         redis.hset("users", reg_user_id, json.dumps(user_data))
 
-        # save active user id in redis db
-        redis.set('active_user_id', reg_user_id)
+        # Get all user IDs from the Redis hash set
+        user_ids = redis.hkeys('users')
+
+        # Iterate over the user IDs
+        for user_id_iter in user_ids:
+            if not user_id_iter.decode('utf-8') == str(reg_user_id):
+                room_name = f"room:{user_id_iter.decode('utf-8')}:{reg_user_id}"
+                # Create an empty sorted set with no members
+                redis.zadd(room_name, {'initial_message': -1})
 
         # If registration is successful, redirect the user to the "home" route
-        return redirect(url_for('chat.home'))
+        return redirect(url_for('chat.home', user_id=reg_user_id))
     else:
         return render_template('registration.html')
