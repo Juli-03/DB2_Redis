@@ -31,6 +31,5 @@ def home():
         # stringify the json data
         json_data = json.dumps(message_data)
         redis.zadd(f"room:{room_id}", {json_data: timestamp})
-    # test
-    active_user_id = redis.get('active_user_id')
-    return render_template('chat.html', active_user_id=active_user_id.decode('utf-8'))
+    user_id = request.args.get('user_id')
+    return render_template('chat.html', user_id=user_id)
