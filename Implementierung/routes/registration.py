@@ -38,13 +38,13 @@ def register():
 
         # Add the email to the ZSET with the user_id as the score
         redis.zadd("user_emails", {reg_email: reg_user_id})
-        
+
         # save user data in form of a json object
         user_data = {
             'email': reg_email,
             'username': reg_username,
             'password': reg_password,
-            'rooms': [room:1:2, ]
+            'rooms': []
         }
         # save user data in redis db as stringified json object
         redis.hset("users", reg_user_id, json.dumps(user_data))
@@ -58,6 +58,10 @@ def register():
                 room_name = f"room:{user_id_iter.decode('utf-8')}:{reg_user_id}"
                 # Create an empty sorted set with no members
                 redis.zadd(room_name, {'initial_message': -1})
+                # add the room to the room list of the user
+                user_data['rooms'].append(room_name)
+                # Update the user's data in Redis
+                redis.hset('users', reg_user_id, json.dumps(user_data))
 
         # If registration is successful, redirect the user to the "home" route
         return redirect(url_for('chat.home', user_id=reg_user_id))
