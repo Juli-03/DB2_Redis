@@ -57,7 +57,8 @@ def register():
             if not user_id_iter.decode('utf-8') == str(reg_user_id):
                 room_name = f"room:{user_id_iter.decode('utf-8')}:{reg_user_id}"
                 # Create an empty sorted set with no members
-                redis.zadd(room_name, {'initial_message': -1})
+                redis.zadd(room_name, {reg_user_id: -1})
+                redis.zadd(room_name, {user_id_iter: -2})
                 user_data_iter_json_bytes = redis.hget('users', user_id_iter.decode('utf-8'))
                 user_data_iter_json = json.loads(user_data_iter_json_bytes)
                 user_data_iter_json['rooms'].append(room_name)
