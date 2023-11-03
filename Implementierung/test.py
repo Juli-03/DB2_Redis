@@ -1,6 +1,7 @@
 import redis
 
-pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
+
+pool = redis.ConnectionPool(host='141.31.94.106', port=6379, db=0)
 redis = redis.Redis(connection_pool=pool)
 
 #redis.set('wohnort', 'kölle')
