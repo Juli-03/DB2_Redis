@@ -1,12 +1,13 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 import redis
 import json
+from config import Config
 
 # register page as blueprint
 registration_bp = Blueprint('registration', __name__)
 
 # get redis connection
-redis = redis.StrictRedis(host='localhost', port=6379, db=0)
+redis = redis.StrictRedis(host=Config.host, port=Config.port, db=0)
 
 # route to registration form
 @registration_bp.route('/register', methods=['GET', 'POST'])

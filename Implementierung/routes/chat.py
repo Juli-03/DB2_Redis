@@ -2,18 +2,24 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for
 import redis
 import time
 import json
+from config import Config
+from loguru import logger
+
+logger.remove()
+logger.add("logs/chat.log")
 
 # register page as blueprint
 chat_bp = Blueprint('chat', __name__)
 
 # get redis connection
-redis = redis.StrictRedis(host='localhost', port=6379, db=0)
+redis = redis.StrictRedis(host=Config.host, port=Config.port, db=0)
 
 # home route is the chatroom
 @chat_bp.route('/home', methods=['GET', 'POST'])
 def home():
     # get user id from url
     user_id = request.args.get('user_id')
+    logger.info(f"user_id: {user_id}")
     # get all rooms 
     # Retrieve the user data from Redis
     user_data_json = redis.hget('users', user_id)
@@ -31,6 +37,7 @@ def home():
 
 
     if request.method == 'POST':
+        logger.info("POST request")
         # get message from input field
         message = request.form['message']
         # get current timestamp
@@ -46,5 +53,6 @@ def home():
         }
         # stringify the json data
         json_data = json.dumps(message_data)
+        logger.info(f"json_data: {json_data}")
         redis.zadd(f"room:{room_id}", {json_data: timestamp})
     return render_template('chat.html', user_id=user_id, rooms = room_keys)
