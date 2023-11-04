@@ -1,4 +1,6 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from models.room import Room
+from models.user import User
 import redis
 import time
 import json
@@ -28,10 +30,24 @@ def home():
     room_keys = user_data.get('rooms', [])
     # Initialize an empty list to store the data from sorted sets
     room_data = []
+    rooms = []
 
     for room_key in room_keys:
         # Retrieve the data from the sorted set
         room_data = redis.zrange(room_key, 0, -1, withscores=True)
+        partnerAId = int(room_data[0][0].decode('utf-8'))
+        partnerBId = int(room_data[1][0].decode('utf-8'))
+        # get both user by their id
+        partnerA_data_json = redis.hget('users', partnerAId)
+        partnerB_data_json = redis.hget('users', partnerBId)
+        partnerA_data = json.loads(partnerA_data_json.decode('utf-8'))
+        partnerB_data = json.loads(partnerB_data_json.decode('utf-8'))
+        # create User objects for both room partners
+        partnerA = User(partnerA_data.get('username', 'Default Name'),partnerA_data.get('email', 'Default Name'), partnerAId)
+        partnerB = User(partnerB_data.get('username', 'Default Name'),partnerB_data.get('email', 'Default Name'), partnerBId)
+        # create room object and fill it with all values
+        tempRoom = Room(partnerA, partnerB, room_key,)
+        rooms.append(tempRoom)
         # Append the room data to the list
         room_data.append((room_key, room_data))
 
@@ -55,4 +71,4 @@ def home():
         json_data = json.dumps(message_data)
         logger.info(f"json_data: {json_data}")
         redis.zadd(f"room:{room_id}", {json_data: timestamp})
-    return render_template('chat.html', user_id=user_id, rooms = room_keys)
+    return render_template('chat.html', user_id=user_id, rooms = room_keys, roomObjects = rooms)
