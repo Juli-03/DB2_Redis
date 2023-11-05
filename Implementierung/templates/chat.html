@@ -51,6 +51,13 @@
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">
+                        {% if selectedRoom is none %}
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 30vh;">
+                            <div>
+                                <strong>Klick auf einen Kontakt, um einen Chat zu beginnen!</strong>
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
@@ -138,6 +145,7 @@
                                 </div>
                             </form>
                         </div>
+                    {% endif %}
                     </div>
                 </div>
             </div>

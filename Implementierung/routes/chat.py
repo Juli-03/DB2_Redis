@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 from models.room import Room
 from models.user import User
+from models.message import *
 import redis
 import time
 import json
@@ -31,6 +32,7 @@ def home():
     # Initialize an empty list to store the data from sorted sets
     room_data = []
     rooms = []
+    selectedRoom = None
 
     for room_key in room_keys:
         # Retrieve the data from the sorted set
@@ -61,14 +63,16 @@ def home():
         # TODO: get actual room ID!!!!
         room_id = '1:2'
         # message for stringified json object
-        message_data = {
-            'from': user_id, 
-            'message': message, 
-            'timestamp': timestamp,
-            'room_id': room_id
-        }
+        message = Message(user_id, message, timestamp, room_id)
+        #message_data = {
+        #    'from': user_id, 
+        #    'message': message, 
+        #    'timestamp': timestamp,
+        #    'room_id': room_id
+        #}
         # stringify the json data
-        json_data = json.dumps(message_data)
+        json_data = json.dumps(message, cls=MessageEncoder)
+        #json_data = json.dumps(message_data)
         logger.info(f"json_data: {json_data}")
         redis.zadd(f"room:{room_id}", {json_data: timestamp})
-    return render_template('chat.html', user_id=user_id, rooms = room_keys, roomObjects = rooms)
+    return render_template('chat.html', user_id=user_id, roomObjects = rooms, selectedRoom = selectedRoom)
