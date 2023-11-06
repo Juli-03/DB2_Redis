@@ -10,3 +10,4 @@ dokumentation.pdf
 *compile.log
 *.DS_Store
 *.log
+*.pyc
