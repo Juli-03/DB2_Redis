@@ -10,8 +10,8 @@
 </head>
 <body>
     <main class="content">
-        <div class="container p-0">
-            <h1 class="h3 mb-3">Nachrichten: {{ user_id }}</h1>
+        <div class="container p-0" data-rooms = "{{ roomObjects }}">
+            <h1 class="h3 mb-3" data-user-id = "{{ user_id }}">Nachrichten: {{ user_id }}</h1>
             <div class="card">
                 <div class="row g-0">
                     <div class="col-12 col-lg-5 col-xl-3 border-right">
@@ -25,7 +25,7 @@
                         </div>
                         {% for room in roomObjects %}
                             {% if not room.partnerA.userId|string() == user_id %}
-                            <a href="#" class="list-group-item list-group-item-action border-0">
+                            <a href="/getClickedRoom?roomId={{ room.roomId }}&userId={{ user_id }}" class="list-group-item list-group-item-action border-0" data-room-id="{{ room.roomId }}">
                                 <div class="badge bg-success float-right">1</div>
                                 <div class="d-flex align-items-start">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
@@ -36,7 +36,7 @@
                                 </div>
                             </a>
                             {% else %}
-                            <a href="#" class="list-group-item list-group-item-action border-0">
+                            <a href="/getClickedRoom?roomId={{ room.roomId }}&userId={{ user_id }}" class="list-group-item list-group-item-action border-0" data-room-id="{{ room.roomId }}">
                                 <div class="badge bg-success float-right">1</div>
                                 <div class="d-flex align-items-start">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
@@ -64,7 +64,11 @@
                                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                 </div>
                                 <div class="flex-grow-1 pl-3">
-                                    <strong>Marius Wergen</strong>
+                                    {% if not selectedRoom.partnerA.userId|string() == user_id %}
+                                    <strong>{{selectedRoom.partnerA.name}}</strong>
+                                    {% else %}
+                                    <strong>{{selectedRoom.partnerB.name}}</strong>
+                                    {% endif %}
                                     <div class="text-muted small"><em>schreibt...</em></div>
                                 </div>
                                 <div>
@@ -155,5 +159,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+</script>
 </body>
 </html>

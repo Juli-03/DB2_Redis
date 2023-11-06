@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
 from models.room import Room
 from models.user import User
 from models.message import *
@@ -35,7 +35,54 @@ def home():
     selectedRoom = None
 
     for room_key in room_keys:
-        # Retrieve the data from the sorted set
+        tempRoom = getRoom(room_key)
+        rooms.append(tempRoom)
+        # Append the room data to the list
+        room_data.append((room_key, room_data))
+    return render_template('chat.html', user_id=user_id, roomObjects = rooms, selectedRoom = selectedRoom)
+
+@chat_bp.route('/getClickedRoom', methods=['POST','GET'])
+def clickedRoom():
+    roomId = request.args.get('roomId')
+    selectedRoom = getRoom(roomId)
+    user_id = request.args.get('userId')
+    # Retrieve the user data from Redis
+    user_data_json = redis.hget('users', user_id)
+    user_data = json.loads(user_data_json.decode('utf-8'))
+    # Fetch the "rooms" list from the user data
+    room_keys = user_data.get('rooms', [])
+    # Initialize an empty list to store the data from sorted sets
+    rooms = []
+    for room_key in room_keys:
+        tempRoom = getRoom(room_key)
+        rooms.append(tempRoom)
+
+    # handle send message
+    if request.method == 'POST':
+        logger.info("POST request")
+        # get message from input field
+        message = request.form['message']
+        # get current timestamp
+        timestamp = int(time.time())
+        # message for stringified json object
+        message = Message(user_id, message, timestamp, roomId)
+        #message_data = {
+        #    'from': user_id, 
+        #    'message': message, 
+        #    'timestamp': timestamp,
+        #    'room_id': room_id
+        #}
+        # stringify the json data
+        json_data = json.dumps(message, cls=MessageEncoder)
+        #json_data = json.dumps(message_data)
+        logger.info(f"json_data: {json_data}")
+        redis.zadd(f"{roomId}", {json_data: timestamp})
+    # Render the chat.html template with the updated selectedRoom
+    return render_template('chat.html', user_id=user_id, roomObjects=rooms, selectedRoom=selectedRoom)
+
+# help function to get all data from a room
+def getRoom(room_key):
+         # Retrieve the data from the sorted set
         room_data = redis.zrange(room_key, 0, -1, withscores=True)
         partnerAId = int(room_data[0][0].decode('utf-8'))
         partnerBId = int(room_data[1][0].decode('utf-8'))
@@ -48,31 +95,5 @@ def home():
         partnerA = User(partnerA_data.get('username', 'Default Name'),partnerA_data.get('email', 'Default Name'), partnerAId)
         partnerB = User(partnerB_data.get('username', 'Default Name'),partnerB_data.get('email', 'Default Name'), partnerBId)
         # create room object and fill it with all values
-        tempRoom = Room(partnerA, partnerB, room_key,)
-        rooms.append(tempRoom)
-        # Append the room data to the list
-        room_data.append((room_key, room_data))
-
-
-    if request.method == 'POST':
-        logger.info("POST request")
-        # get message from input field
-        message = request.form['message']
-        # get current timestamp
-        timestamp = int(time.time())
-        # TODO: get actual room ID!!!!
-        room_id = '1:2'
-        # message for stringified json object
-        message = Message(user_id, message, timestamp, room_id)
-        #message_data = {
-        #    'from': user_id, 
-        #    'message': message, 
-        #    'timestamp': timestamp,
-        #    'room_id': room_id
-        #}
-        # stringify the json data
-        json_data = json.dumps(message, cls=MessageEncoder)
-        #json_data = json.dumps(message_data)
-        logger.info(f"json_data: {json_data}")
-        redis.zadd(f"room:{room_id}", {json_data: timestamp})
-    return render_template('chat.html', user_id=user_id, roomObjects = rooms, selectedRoom = selectedRoom)
+        tempRoom = Room(partnerA, partnerB, room_key)
+        return tempRoom
