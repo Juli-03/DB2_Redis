@@ -23,50 +23,41 @@
                                 </div>
                             </div>
                         </div>
-                        {% for room_key in rooms %}
+                        {% for room in roomObjects %}
+                            {% if not room.partnerA.userId|string() == user_id %}
                             <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="badge bg-success float-right">{{ room_key }}</div>
+                                <div class="badge bg-success float-right">1</div>
                                 <div class="d-flex align-items-start">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                     <div class="flex-grow-1 ml-3">
-                                        Felix Wilhelm
+                                        {{ room.partnerA.name }}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
                                     </div>
                                 </div>
                             </a>
+                            {% else %}
+                            <a href="#" class="list-group-item list-group-item-action border-0">
+                                <div class="badge bg-success float-right">1</div>
+                                <div class="d-flex align-items-start">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                                    <div class="flex-grow-1 ml-3">
+                                        {{ room.partnerB.name }}
+                                        <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endif %}
                         {% endfor %}
-                        <a href="#" class="list-group-item list-group-item-action border-0">
-                            <div class="badge bg-success float-right">5</div>
-                            <div class="d-flex align-items-start">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                <div class="flex-grow-1 ml-3">
-                                    Felix Wilhelm
-                                    <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action border-0">
-                            <div class="badge bg-success float-right">2</div>
-                            <div class="d-flex align-items-start">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="William Harris" width="40" height="40">
-                                <div class="flex-grow-1 ml-3">
-                                    Tim Steiner
-                                    <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action border-0">
-                            <div class="d-flex align-items-start">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                <div class="flex-grow-1 ml-3">
-                                    Julian Bork
-                                    <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                </div>
-                            </div>
-                        </a>
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">
+                        {% if selectedRoom is none %}
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 30vh;">
+                            <div>
+                                <strong>Klick auf einen Kontakt, um einen Chat zu beginnen!</strong>
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
@@ -154,6 +145,7 @@
                                 </div>
                             </form>
                         </div>
+                    {% endif %}
                     </div>
                 </div>
             </div>
