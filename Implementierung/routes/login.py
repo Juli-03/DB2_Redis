@@ -3,9 +3,10 @@ import redis
 import json
 from config import Config
 from loguru import logger
+import bcrypt
 
 logger.remove()
-logger.add("logs/login.log")
+logger.add("log.log")
 # register page as blueprint
 login_bp = Blueprint('login', __name__)
 
@@ -20,7 +21,6 @@ def login():
         # get entered email and password
         email = request.form['email']
         password = request.form['password']
-
         # Check if the user id counter already exists
         if not redis.exists('user_id_counter'):
             # there are no users in database
@@ -43,12 +43,13 @@ def login():
                 # get password from database
                 db_password = user_data['password']
                 # compare entered password with database
-                if password == db_password:
+                if bcrypt.checkpw(password.encode('utf-8'), db_password.encode('utf-8')):
                     # If login is successful, redirect the user to the "home" route
                     logger.info(f"login successful for user_id: {user_id}")
                     return redirect(url_for('chat.home', user_id=user_id))
                 # If login is not successful, redirect the user to the "login" route
                 else:
+                    logger.info("login not successful")
                     return redirect(url_for('login.login'))
     else:
         return render_template('login.html')

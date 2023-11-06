@@ -2,6 +2,11 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for
 import redis
 import json
 from config import Config
+from loguru import logger
+import bcrypt
+
+logger.remove()
+logger.add("log.log")
 
 # register page as blueprint
 registration_bp = Blueprint('registration', __name__)
@@ -19,6 +24,20 @@ def register():
         reg_email = request.form['reg_email']
         reg_username = request.form['reg_username']
         reg_password = request.form['reg_password']
+        reg_password_repeat = request.form['reg_password_repeat'] 
+        # hash the password
+        salt = bcrypt.gensalt() # generate salt -> number of rounds of hashing (default: 12)
+        reg_password_hash = bcrypt.hashpw(reg_password.encode('utf-8'), salt) #returns a byte object
+        reg_password_hash = reg_password_hash.decode('utf-8') # convert byte object to string
+        logger.info(f"Password: {reg_password}, reg_password_hash: {reg_password_hash}")
+
+        
+        # Check if the passwords match
+        if reg_password != reg_password_repeat:
+            # If registration is not successful, redirect the user to the "register" route
+            return redirect(url_for('registration.register', error=True))
+        else:
+            logger.info("Passwords match")
 
         # Check if the user id counter already exists
         if not redis.exists('user_id_counter'):
@@ -41,10 +60,11 @@ def register():
         redis.zadd("user_emails", {reg_email: reg_user_id})
 
         # save user data in form of a json object
+        logger.warning(f"typeof reg_password_hash: {type(reg_password_hash)}")
         user_data = {
             'email': reg_email,
             'username': reg_username,
-            'password': reg_password,
+            'password': reg_password_hash,
             'rooms': []
         }
         # save user data in redis db as stringified json object
@@ -72,4 +92,4 @@ def register():
         # If registration is successful, redirect the user to the "home" route
         return redirect(url_for('chat.home', user_id=reg_user_id))
     else:
-        return render_template('registration.html')
+        return render_template('registration.php')

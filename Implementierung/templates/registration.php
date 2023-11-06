@@ -19,20 +19,7 @@
       <div class="input-box">
         <input type="password" placeholder="Passwort" name="reg_password" id="reg_password" required>
       </div>
-      <h1 class="h3 mb-3" style="color:red" id="error" hidden>Passwörter stimmen nicht überein!</h1>
-      <?php 
-      try{
-        $error = $_GET['error']; 
-        if ($error == True){
-        $error_element = document.getElementById("error");
-        $error_element.setAttribute("hidden", "false");
-        }
-      }
-      catch(Exception $e){
-        $error = False;
-      }
-   
-      ?>
+      <h1 class="h3 mb-3" style="color:red" id="error" hidden="True">Passwörter stimmen nicht überein!</h1>
       <div class="input-box">
         <input type="password" placeholder="Passwort wiederholen" name="reg_password_repeat" id="reg_password_repeat" required>
       </div>
@@ -50,5 +37,27 @@
       </div>      
     </form>
   </div>
+  <script>
+      try{
+        var parts = window.location.search.substr(1).split("&");
+        var $_GET = {};
+        for (var i = 0; i < parts.length; i++) {
+          var temp = parts[i].split("=");
+          $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+        }
+        var error = $_GET['error'];
+        console.log(error);
+        console.log(typeof(error)); 
+        console.log("test2")
+        if (error == "True"){
+          console.log("if")
+          var error_element = document.getElementById("error");
+          error_element.removeAttribute("hidden");
+        }
+      } catch (err){
+        console.log(err);
+        console.log("test")
+      }
+    </script>
 </body>
 </html>

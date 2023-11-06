@@ -6,7 +6,7 @@ from config import Config
 from loguru import logger
 
 logger.remove()
-logger.add("logs/chat.log")
+logger.add("log.log")
 
 # register page as blueprint
 chat_bp = Blueprint('chat', __name__)
