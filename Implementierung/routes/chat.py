@@ -66,12 +66,6 @@ def clickedRoom():
         timestamp = int(time.time())
         # message for stringified json object
         message = Message(user_id, message, timestamp, roomId)
-        #message_data = {
-        #    'from': user_id, 
-        #    'message': message, 
-        #    'timestamp': timestamp,
-        #    'room_id': room_id
-        #}
         # stringify the json data
         json_data = json.dumps(message, cls=MessageEncoder)
         #json_data = json.dumps(message_data)
@@ -94,6 +88,12 @@ def getRoom(room_key):
         # create User objects for both room partners
         partnerA = User(partnerA_data.get('username', 'Default Name'),partnerA_data.get('email', 'Default Name'), partnerAId)
         partnerB = User(partnerB_data.get('username', 'Default Name'),partnerB_data.get('email', 'Default Name'), partnerBId)
+        messages = []
+        # get all messages from the room
+        for index in room_data[2:]:
+             messageJSON = json.loads(room_data[2][0].decode('utf-8'))
+             tempMessage = Message(messageJSON['user_id'],messageJSON['message'],messageJSON['timestamp'], messageJSON['room_id'])
+             messages.append(tempMessage)
         # create room object and fill it with all values
-        tempRoom = Room(partnerA, partnerB, room_key)
+        tempRoom = Room(partnerA, partnerB, room_key,messages)
         return tempRoom
