@@ -91,7 +91,7 @@ def getRoom(room_key):
         messages = []
         # get all messages from the room
         for index in room_data[2:]:
-             messageJSON = json.loads(room_data[2][0].decode('utf-8'))
+             messageJSON = json.loads(index[0].decode('utf-8'))
              tempMessage = Message(messageJSON['user_id'],messageJSON['message'],messageJSON['timestamp'], messageJSON['room_id'])
              messages.append(tempMessage)
         # create room object and fill it with all values
