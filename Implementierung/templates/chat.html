@@ -80,7 +80,7 @@
                         </div>
                         <div class="position-relative">
                             <div class="chat-messages p-4">
-                            {% for message in roomObjects.messages %}
+                            {% for message in selectedRoom.messages %}
                                 {% if message.sentById|string() == user_id%}
                                 <div class="chat-message-right pb-4">
                                     <div>
