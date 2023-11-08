@@ -103,6 +103,7 @@ def getRoom(room_key):
         tempRoom = Room(partnerA, partnerB, room_key,messages)
         return tempRoom
 
+"""
 @socketio.on('send_message')
 def handle_send_message(data):
     room_id = data['room_id']
@@ -113,21 +114,20 @@ def handle_send_message(data):
     socketio.emit('receive_message', {'room_id': room_id, 'message': message}, room=room_id)
     r.publish(roomId, json.dumps(message_with_sender))
 """
+
 @socketio.on('message')
 def handle_message(data):
-    roomId = request.args.get('roomId')
     if isinstance(data, str):
         data = json.loads(data)
-    message = request.form['message']
-    user_id = request.args.get('user_id')
+    message = data.get('message')
+    sender = data.get('sender')
     if message and sender:
         message_with_sender = {
-            "user_id": user_id,
+            "sender": sender,
             "message": message
         }
-        r.publish(roomId, json.dumps(message_with_sender))
+        r.publish('my-channel', json.dumps(message_with_sender))
         send(message_with_sender, broadcast=True)
-        
 
 def subscriber():
     pubsub = r.pubsub()
@@ -142,4 +142,6 @@ def subscriber():
                 print(f"Received message from {data['sender']}: {data['message']}")
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
-"""
+
+def start_subscriber_thread():
+    threading.Thread(target=subscriber).start()
