@@ -1,0 +1,5 @@
+flask
+redis
+json
+loguru
+bcrypt
