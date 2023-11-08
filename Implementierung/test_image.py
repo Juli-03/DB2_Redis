@@ -22,3 +22,11 @@ for index, img_url in enumerate(img_urls):
     redis.zadd("avatars", {output.getvalue(): index})
     output.close()
     redis.save  #redis-cli --raw get 'imgdata' >test.jpg
+
+
+# get all avatars
+avatars = redis.zrange("avatars", 0, -1)
+for avatar in avatars:
+    im = Image.open(BytesIO(avatar))
+    im.show()
+    im.close()
