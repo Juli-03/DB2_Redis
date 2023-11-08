@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="position-relative">
-                            <div class="chat-messages p-4">
+                            <div class="chat-messages p-4" id="messageContainer">
                             {% if not selectedRoom.messages %}
                                 <p class="text-center"><strong>Noch keine Nachrichten!</strong></p>
                             {% endif %}
@@ -115,7 +115,7 @@
                             <form action="" method="POST">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Type your message" name="message" id="message">
-                                    <button class="btn btn-primary">senden</button>
+                                    <button class="btn btn-primary" onclick="sendMessage()">senden</button>
                                 </div>
                             </form>
                         </div>
@@ -129,7 +129,44 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--<script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    socket.on('message', function(data) {
+        var messageContainer = document.getElementById('messageContainer');
+        var newMessage = document.createElement('div');
+        newMessage.textContent = data.user_id + ': ' + data.message;
+        messageContainer.appendChild(newMessage);
+    });
+
+function sendMessage() {
+    var messageInput = document.getElementById('message');
+    var senderInput = document.querySelectorAll('[data-user-id]');
+    var message = messageInput.value;
+    var sender = senderInput.value;
+    socket.send(JSON.stringify({sender: sender, message: message}));
+    messageInput.value = '';
+}
+</script>
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+<script type="text/javascript">
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    // Event handler for a received message
+    socket.on('receive_message', function(data) {
+        var room_id = data.room_id;
+        var message = data.message;
+        // Handle the received message and update the UI
+    });
+
+    // Function to send a message
+    function sendMessage(room_id, message) {
+        socket.emit('send_message', {'room_id': room_id, 'message': message});
+    }
 </script>
 </body>
 </html>
