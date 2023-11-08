@@ -16,6 +16,7 @@
       <div class="input-box">
         <input type="password" placeholder="Passwort" name="password" id="password" required>
       </div>
+      <h1 class="h3 mb-3" style="color:red; font-size: 90%;" id="pw_mismatch" hidden="True">Passwort oder Mail falsch!</h1>
       <div class="input-box button">
         <input type="Submit" value="Einloggen">
       </div>
@@ -24,5 +25,26 @@
       </div>
     </form>
   </div>
+  <script>
+    try{
+        var parts = window.location.search.substr(1).split("&");
+        var $_GET = {};
+        for (var i = 0; i < parts.length; i++) {
+          var temp = parts[i].split("=");
+          $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+        }
+        var error = $_GET['error'];
+        console.log(error);
+        console.log(typeof(error)); 
+
+        if (error == "True"){
+          console.log("if")
+          var error_element = document.getElementById("pw_mismatch");
+          error_element.removeAttribute("hidden");
+        }
+      } catch (err){
+        console.log(err);
+      }
+  </script>
 </body>
 </html>

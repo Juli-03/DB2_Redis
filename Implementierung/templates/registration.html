@@ -16,23 +16,11 @@
       <div class="input-box">
         <input type="text" placeholder="E-Mail eingeben" name="reg_email" id="reg_email" required>
       </div>
+      <h2 class="h3 mb-3" style="color:red; font-size: 90%;" id="email_exists" hidden="True">E-Mail existiert bereits!</h2>
       <div class="input-box">
         <input type="password" placeholder="Passwort" name="reg_password" id="reg_password" required>
       </div>
-      <h1 class="h3 mb-3" style="color:red" id="error" hidden>Passwörter stimmen nicht überein!</h1>
-      <?php 
-      try{
-        $error = $_GET['error']; 
-        if ($error == True){
-        $error_element = document.getElementById("error");
-        $error_element.setAttribute("hidden", "false");
-        }
-      }
-      catch(Exception $e){
-        $error = False;
-      }
-   
-      ?>
+      <h2 class="h3 mb-3" style="color:red; font-size: 90%;" id="pw_mismatch" hidden="True">Passwörter stimmen nicht überein!</h2>
       <div class="input-box">
         <input type="password" placeholder="Passwort wiederholen" name="reg_password_repeat" id="reg_password_repeat" required>
       </div>
@@ -50,5 +38,33 @@
       </div>      
     </form>
   </div>
+  <script>
+      try{
+        var parts = window.location.search.substr(1).split("&");
+        var $_GET = {};
+        for (var i = 0; i < parts.length; i++) {
+          var temp = parts[i].split("=");
+          $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+        }
+        var error = $_GET['error'];
+        var errorlist = error.split("");
+        console.log(error);
+        console.log(typeof(error)); 
+
+        if (errorlist.includes("M")){
+          console.log("if")
+          var error_element = document.getElementById("pw_mismatch");
+          error_element.removeAttribute("hidden");
+        }
+        
+        if (errorlist.includes("E")){
+          console.log("elif")
+          var error_element = document.getElementById("email_exists");
+          error_element.removeAttribute("hidden");
+        }
+      } catch (err){
+        console.log(err);
+      }
+    </script>
 </body>
 </html>

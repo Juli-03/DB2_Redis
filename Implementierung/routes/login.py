@@ -28,11 +28,15 @@ def login():
         # user id counter already exists
         else:
             # check if email already exists
-            user_id = int(redis.zscore("user_emails", email))
+            try:
+                user_id = int(redis.zscore("user_emails", email))
+            except(TypeError):
+                logger.info("email does not exist")
+                user_id = None
             # email does not exist -> user has to register first
             if user_id is None:
                 # TODO: show error message
-                return redirect(url_for('login.login'))
+                return redirect(url_for('login.login', error="True"))
             # email exists -> check password
             else:
                 # get user data from database as json object
@@ -50,6 +54,6 @@ def login():
                 # If login is not successful, redirect the user to the "login" route
                 else:
                     logger.info("login not successful")
-                    return redirect(url_for('login.login'))
+                    return redirect(url_for('login.login', error="True"))
     else:
         return render_template('login.html')

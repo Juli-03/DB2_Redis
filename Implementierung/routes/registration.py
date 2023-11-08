@@ -30,12 +30,13 @@ def register():
         reg_password_hash = bcrypt.hashpw(reg_password.encode('utf-8'), salt) #returns a byte object
         reg_password_hash = reg_password_hash.decode('utf-8') # convert byte object to string
         logger.info(f"Password: {reg_password}, reg_password_hash: {reg_password_hash}")
-
+        error = ""
         
         # Check if the passwords match
         if reg_password != reg_password_repeat:
             # If registration is not successful, redirect the user to the "register" route
-            return redirect(url_for('registration.register', error=True))
+            error+="M"
+            #return redirect(url_for('registration.register', error="M")) #error M for mismatch
         else:
             logger.info("Passwords match")
 
@@ -49,10 +50,13 @@ def register():
             user_id = redis.zscore("user_emails", reg_email)
             # email already exists
             if user_id is not None:
+                error+="E"
                 # If registration is not successful, redirect the user to the "register" route
-                # TODO: show error message
-                return redirect(url_for('registration.register'))
-
+                #return redirect(url_for('registration.register', error="E")) #error E for email already exists
+                
+        if error!="":
+            #if error occured redirect to registration page with error code
+            return redirect(url_for('registration.register', error=error))
         # get new user id (increment user_id_counter by 1)
         reg_user_id = redis.incr('user_id_counter')
 
@@ -92,4 +96,4 @@ def register():
         # If registration is successful, redirect the user to the "home" route
         return redirect(url_for('chat.home', user_id=reg_user_id))
     else:
-        return render_template('registration.php')
+        return render_template('registration.html')
