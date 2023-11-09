@@ -53,7 +53,7 @@ def subscriber():
                 data = data.decode('utf-8')
             try:
                 data = json.loads(data)
-                print(f"Received message from {data['sender']}: {data['message']}")
+                print(f"Received message from {data['user_id']}: {data['message']}")
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
 
