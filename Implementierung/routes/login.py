@@ -1,9 +1,13 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
-import redis
+# library imports
 import json
-from config import Config
-from loguru import logger
+import redis
 import bcrypt
+import requests
+from PIL import Image
+from io import BytesIO
+from loguru import logger
+from config import Config
+from flask import Flask, Blueprint, render_template, request, redirect, url_for
 
 logger.remove()
 logger.add("log.log")
@@ -16,8 +20,13 @@ redis = redis.StrictRedis(host=Config.host, port=Config.port, db=0)
 # route to login form -> is set to default route, so user has always to login first
 @login_bp.route('/', methods=['GET', 'POST'])
 def login():
+    # check if the avatar images have already been loaded into the database
+    if not redis.exists('avatars'):
+        # load avatars into database
+        load_avatars()
+
+    # Method if the user clicks the "Login" button
     if request.method == 'POST':
-        # TODO perform validation
         # get entered email and password
         email = request.form['email']
         password = request.form['password']
@@ -57,3 +66,29 @@ def login():
                     return redirect(url_for('login.login', error="True"))
     else:
         return render_template('login.html')
+    
+
+# load the avatar images into the database
+def load_avatars():
+    # urls where the avatars are stored
+    avatar_urls = ["https://bootdey.com/img/Content/avatar/avatar1.png",
+                "https://bootdey.com/img/Content/avatar/avatar2.png",
+                "https://bootdey.com/img/Content/avatar/avatar3.png",
+                "https://bootdey.com/img/Content/avatar/avatar4.png",
+                "https://bootdey.com/img/Content/avatar/avatar5.png",
+                "https://bootdey.com/img/Content/avatar/avatar6.png",
+                "https://bootdey.com/img/Content/avatar/avatar7.png",
+                "https://bootdey.com/img/Content/avatar/avatar8.png"]
+    
+    # iterate over all 8 avatar urls
+    for index, img_url in enumerate(avatar_urls):
+        # create a byte stream
+        output = BytesIO()
+        # open the image from the url
+        im = Image.open(BytesIO(requests.get(img_url).content))
+        # save the image in the byte stream
+        im.save(output, format=im.format)
+        # add the image to the database
+        redis.zadd("avatars", {output.getvalue(): index})
+        # close the byte stream
+        output.close()

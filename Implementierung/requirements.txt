@@ -3,3 +3,6 @@ redis
 json
 loguru
 bcrypt
+io
+pillow
+requests
