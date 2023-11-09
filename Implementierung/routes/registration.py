@@ -57,6 +57,8 @@ def register():
         if error!="":
             #if error occured redirect to registration page with error code
             return redirect(url_for('registration.register', error=error))
+        # get an avatar for the user
+        avatar_index = int(redis.get('user_id_counter')) % 8
         # get new user id (increment user_id_counter by 1)
         reg_user_id = redis.incr('user_id_counter')
 
@@ -69,7 +71,8 @@ def register():
             'email': reg_email,
             'username': reg_username,
             'password': reg_password_hash,
-            'rooms': []
+            'rooms': [],
+            'avatar': avatar_index
         }
         # save user data in redis db as stringified json object
         redis.hset("users", reg_user_id, json.dumps(user_data))
