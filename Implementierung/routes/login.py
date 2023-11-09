@@ -1,4 +1,21 @@
-# library imports
+"""
+File: login.py
+Author: Tim Steiner, Julian Bork, Felix Wilhelm, Marius Wergen
+Date: October 13, 2023
+Description: This script contains the routes for the login page.
+
+Usage:
+- Function login(): Renders the login.html template.
+
+- Function load_avatars(): Loads the avatar images into the database, if they are not already there.
+
+- login is used for a user to login to the chatroom 
+    - user has to enter email and password
+    - if email does not exist, user has to register first
+    - if email exists, password is checked
+"""
+
+# imports of used libraries
 import json
 import redis
 import bcrypt

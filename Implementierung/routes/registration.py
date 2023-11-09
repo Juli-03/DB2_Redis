@@ -1,10 +1,27 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
-import redis
+"""
+File: registration.py
+Author: Tim Steiner, Julian Bork, Felix Wilhelm, Marius Wergen
+Date: October 13, 2023
+Description: This script contains the routes for the registration page.
+
+Usage:
+- Function register(): Renders the registration.html template.
+
+- register is used for a user to register to the chatroom
+    - user has to enter email, username and password
+    - if email already exists, user has to login
+    - if email does not exist, password is checked and user is registered
+"""
+
+# imports of used libraries
 import json
+import redis
+import bcrypt
 from config import Config
 from loguru import logger
-import bcrypt
+from flask import Flask, Blueprint, render_template, request, redirect, url_for
 
+# remove default logger
 logger.remove()
 logger.add("log.log")
 

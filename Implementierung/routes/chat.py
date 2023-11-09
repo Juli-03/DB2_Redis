@@ -1,12 +1,27 @@
-from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
+"""
+File: chat.py
+Author: Tim Steiner, Julian Bork, Felix Wilhelm, Marius Wergen
+Date: October 13, 2023
+Description: This script contains the routes for the chatroom.
+
+Usage:
+- Function home(): Renders the chat.html template.
+
+- Function getRoom(): Returns a Room object with all data from the room.
+
+- Function clickedRoom(): Renders the chat.html template with the selected room.
+"""
+
+# imports of used libraries
+import time
+import json
+import redis
+from config import Config
+from loguru import logger
 from models.room import Room
 from models.user import User
 from models.message import *
-import redis
-import time
-import json
-from config import Config
-from loguru import logger
+from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
 
 logger.remove()
 logger.add("log.log")
@@ -41,6 +56,7 @@ def home():
         room_data.append((room_key, room_data))
     return render_template('chat.html', user_id=user_id, roomObjects = rooms, selectedRoom = selectedRoom)
 
+# route to render the chatroom when a room is clicked
 @chat_bp.route('/getClickedRoom', methods=['POST','GET'])
 def clickedRoom():
     roomId = request.args.get('roomId')
