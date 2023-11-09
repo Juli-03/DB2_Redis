@@ -9,3 +9,6 @@ Repo für das E-Book über Redis und eine beispielhafte Implementierung
 - Julian Bork
 - Marius Wergen
 
+---
+
+_für Installations-Anweisungen: siehe README im Ordner Implementierung!_
