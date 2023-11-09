@@ -6,6 +6,7 @@ import redis
 import json
 import time
 from routes.chat import chat_bp, redis
+from models.message import *
 
 from config import Config
 from routes.chat import chat_bp
@@ -34,13 +35,20 @@ def handle_message(data):
         data = json.loads(data)
     message = data.get('message')
     sender = data.get('user_id')
+    timestamp = int(time.time())
+    room_id = data.get('room_id')
+    
     if message and sender:
         message_with_sender = {
             "user_id": sender,
-            "message": message
+            "message": message,
+            "timestamp": timestamp,
+            "room_id": room_id
         }
         r.publish('my-channel', json.dumps(message_with_sender))
         send(message_with_sender, broadcast=True)
+        json_data = json.dumps(message_with_sender, cls=MessageEncoder)
+        redis.zadd(f"{room_id}", {json_data: timestamp})
         print(message_with_sender)
 
 def subscriber():
@@ -63,3 +71,7 @@ if __name__ == '__main__':
     #threading.Thread(target=subscriber).start()
     threading.Thread(target=subscriber).start()
     socketio.run(app, debug=True)
+
+
+
+# Überlegung:    Schreiben der historischen Chats auch über den Websocket

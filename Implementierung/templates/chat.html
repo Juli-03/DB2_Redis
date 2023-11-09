@@ -178,7 +178,6 @@
             var newMessage = document.createElement('div');
             newMessage.textContent = data.user_id + ': ' + data.message + document.domain + location.port;
             messageContainer.appendChild(newMessage);
-            console.log(messageContainer + newMessage)
         });
 
         function sendMessage(event) {
@@ -193,8 +192,9 @@
             var sender = "Antoscha";
             console.log(sender);
             var userId = document.querySelector('[data-user-id]').getAttribute('data-user-id');
+            var roomId = document.querySelector('[data-room-id]').getAttribute('data-room-id');
             console.log(userId)
-            socket.send(JSON.stringify({user_id: userId, message: message}));
+            socket.send(JSON.stringify({user_id: userId, message: message, room_id: roomId}));
             messageInput.value = '';
         }
     </script>

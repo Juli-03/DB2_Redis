@@ -114,7 +114,7 @@ def handle_send_message(data):
     socketio.emit('receive_message', {'room_id': room_id, 'message': message}, room=room_id)
     r.publish(roomId, json.dumps(message_with_sender))
 """
-
+"""
 @socketio.on('message')
 def handle_message(data):
     if isinstance(data, str):
@@ -145,3 +145,4 @@ def subscriber():
 
 def start_subscriber_thread():
     threading.Thread(target=subscriber).start()
+"""
