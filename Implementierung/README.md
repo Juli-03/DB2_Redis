@@ -14,16 +14,12 @@ see: [Install Redis on Linux](https://redis.io/docs/install/install-redis/instal
 
 setup a VM on your Windows with Ubuntu running and follow the steps described above for _Install Redis on Linux_
 
----
-
 ## Get the website running
 
 1. install the necessary packages using our requirements.txt
 2. run the python file chatApp.py
 
      _voila_
-
---- 
 
 ## Analyse your Redis DB
 
