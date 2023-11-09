@@ -9,16 +9,6 @@ from loguru import logger
 from config import Config
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 
-# urls where the avatars are stored
-avatar_urls = ["https://bootdey.com/img/Content/avatar/avatar1.png",
-            "https://bootdey.com/img/Content/avatar/avatar2.png",
-            "https://bootdey.com/img/Content/avatar/avatar3.png",
-            "https://bootdey.com/img/Content/avatar/avatar4.png",
-            "https://bootdey.com/img/Content/avatar/avatar5.png",
-            "https://bootdey.com/img/Content/avatar/avatar6.png",
-            "https://bootdey.com/img/Content/avatar/avatar7.png",
-            "https://bootdey.com/img/Content/avatar/avatar8.png"]
-
 logger.remove()
 logger.add("log.log")
 # register page as blueprint
@@ -33,18 +23,7 @@ def login():
     # check if the avatar images have already been loaded into the database
     if not redis.exists('avatars'):
         # load avatars into database
-        # iterate over all 8 avatar urls
-        for index, img_url in enumerate(avatar_urls):
-            # create a byte stream
-            output = BytesIO()
-            # open the image from the url
-            im = Image.open(BytesIO(requests.get(img_url).content))
-            # save the image in the byte stream
-            im.save(output, format=im.format)
-            # add the image to the database
-            redis.zadd("avatars", {output.getvalue(): index})
-            # close the byte stream
-            output.close()
+        load_avatars()
 
     # Method if the user clicks the "Login" button
     if request.method == 'POST':
@@ -87,3 +66,29 @@ def login():
                     return redirect(url_for('login.login', error="True"))
     else:
         return render_template('login.html')
+    
+
+# load the avatar images into the database
+def load_avatars():
+    # urls where the avatars are stored
+    avatar_urls = ["https://bootdey.com/img/Content/avatar/avatar1.png",
+                "https://bootdey.com/img/Content/avatar/avatar2.png",
+                "https://bootdey.com/img/Content/avatar/avatar3.png",
+                "https://bootdey.com/img/Content/avatar/avatar4.png",
+                "https://bootdey.com/img/Content/avatar/avatar5.png",
+                "https://bootdey.com/img/Content/avatar/avatar6.png",
+                "https://bootdey.com/img/Content/avatar/avatar7.png",
+                "https://bootdey.com/img/Content/avatar/avatar8.png"]
+    
+    # iterate over all 8 avatar urls
+    for index, img_url in enumerate(avatar_urls):
+        # create a byte stream
+        output = BytesIO()
+        # open the image from the url
+        im = Image.open(BytesIO(requests.get(img_url).content))
+        # save the image in the byte stream
+        im.save(output, format=im.format)
+        # add the image to the database
+        redis.zadd("avatars", {output.getvalue(): index})
+        # close the byte stream
+        output.close()
