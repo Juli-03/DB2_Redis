@@ -80,8 +80,12 @@ def clickedRoom():
         message = request.form['message']
         # get current timestamp
         timestamp = int(time.time())
+        sender_data = redis.hget('users', user_id)
+        sender_json = json.loads(sender_data.decode('utf-8'))
+        avatarSender = redis.zrangebyscore("avatars", sender_json['avatar'], sender_json['avatar'])
+        sender = User(sender_json.get('username', 'Default Name'),sender_json.get('email', 'Default Name'), user_id, avatarSender)
         # message for stringified json object
-        message = Message(user_id, message, timestamp, roomId)
+        message = Message(user_id, message, timestamp, roomId,sender)
         # stringify the json data
         json_data = json.dumps(message, cls=MessageEncoder)
         #json_data = json.dumps(message_data)
@@ -115,7 +119,11 @@ def getRoom(room_key):
         # get all messages from the room
         for index in room_data[2:]:
              messageJSON = json.loads(index[0].decode('utf-8'))
-             tempMessage = Message(messageJSON['user_id'],messageJSON['message'],messageJSON['timestamp'], messageJSON['room_id'])
+             sender_data = redis.hget('users', messageJSON['user_id'])
+             sender_json = json.loads(sender_data.decode('utf-8'))
+             avatarSender = redis.zrangebyscore("avatars", sender_json['avatar'], sender_json['avatar'])
+             sender = User(sender_json.get('username', 'Default Name'),sender_json.get('email', 'Default Name'), messageJSON['user_id'], avatarSender)
+             tempMessage = Message(messageJSON['user_id'],messageJSON['message'],messageJSON['timestamp'], messageJSON['room_id'],sender)
              messages.append(tempMessage)
         # create room object and fill it with all values
         tempRoom = Room(partnerA, partnerB, room_key,messages)
