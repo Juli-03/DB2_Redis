@@ -20,7 +20,7 @@ redis = Config.redis
 # create flask app
 app = Flask(__name__,static_folder='staticFiles', template_folder='templates')
 #create connection to socket and redis server
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode = 'threading')
 r = redis
 
 # register blueprints
@@ -46,14 +46,14 @@ def handle_message(data):
             "room_id": room_id
         }
         r.publish(room_id, json.dumps(message_with_sender))
-        send(message_with_sender, broadcast=True)
+        #send(message_with_sender, broadcast=True)
         json_data = json.dumps(message_with_sender, cls=MessageEncoder)
         redis.zadd(f"{room_id}", {json_data: timestamp})
         print(message_with_sender)
 
 def subscriber():
     pubsub = r.pubsub()
-    pubsub.subscribe('my-channel')
+    pubsub.subscribe('room:1:3')
     for message in pubsub.listen():
         if message['type'] == 'message':
             data = message['data']
@@ -62,6 +62,8 @@ def subscriber():
             try:
                 data = json.loads(data)
                 print(f"Received message from {data['user_id']}: {data['message']}")
+                socketio.emit('message', data)
+                print("send data over to socket: ", data)
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
 
