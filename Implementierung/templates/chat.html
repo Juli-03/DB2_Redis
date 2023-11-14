@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         {% else %}
-                        <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                        <div class="py-2 px-4 border-bottom d-none d-lg-block" data-room-id = "{{ selectedRoom.roomId }}">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
@@ -145,7 +145,7 @@
             <input type="text" id="messageInput" placeholder="Your message">
             <button onclick="sendMessage()">Send</button>
         </div>
-        <div id="messageContainer">TestContainer</div>
+        
     </main>
 <!-- Include Bootstrap JS (Popper.js and Bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -155,6 +155,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
         var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        var url_string = window.location;
+        var url = new URL(url_string);
+        var c = url.searchParams.get("roomId");
+        console.log(c)
 
         function submitForm(event) {
             event.preventDefault(); // Verhindert das Standardverhalten des Formulars
@@ -173,11 +178,30 @@
             // Hier können Sie die Antwort verarbeiten oder die Seite entsprechend aktualisieren
         }
 
+        // socket.on('message', function(data) {
+        //     var messageContainer = document.getElementById('messageContainer');
+        //     var newMessage = document.createElement('div');
+        //     newMessage.textContent = data.user_id + ': ' + data.message + document.domain + location.port;
+        //     messageContainer.appendChild(newMessage);
+        // });
         socket.on('message', function(data) {
             var messageContainer = document.getElementById('messageContainer');
-            var newMessage = document.createElement('div');
-            newMessage.textContent = data.user_id + ': ' + data.message + document.domain + location.port;
-            messageContainer.appendChild(newMessage);
+            var newMessageContainer = document.createElement('div');
+            newMessageContainer.className = 'chat-message-right pb-4'; // Füge die Klasse hinzu
+
+            // Erstelle das innere HTML-Element ähnlich wie dein gewünschtes Beispiel
+            newMessageContainer.innerHTML = `
+                <div>
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="${data.user_id}" width="40" height="40">
+                    <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
+                </div>
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                    <div class="font-weight-bold mb-1">${data.user_id}</div>
+                    ${data.message}
+                </div>
+            `;
+
+            messageContainer.appendChild(newMessageContainer);
         });
 
         function sendMessage(event) {
@@ -187,14 +211,16 @@
             console.log(messageInput)
             var senderInput = document.getElementById('senderInput');
             var message = messageInput.value;
-            console.log(message)
-            var sender = senderInput.value;
-            var sender = "Antoscha";
-            console.log(sender);
+            
             var userId = document.querySelector('[data-user-id]').getAttribute('data-user-id');
-            var roomId = document.querySelector('[data-room-id]').getAttribute('data-room-id');
+            
+            var url_string = window.location;
+            var url = new URL(url_string);
+            var room_id = url.searchParams.get("roomId");
+            
+
             console.log(userId)
-            socket.send(JSON.stringify({user_id: userId, message: message, room_id: roomId}));
+            socket.send(JSON.stringify({user_id: userId, message: message, room_id: room_id}));
             messageInput.value = '';
         }
     </script>
