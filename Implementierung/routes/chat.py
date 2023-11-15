@@ -13,15 +13,20 @@ Usage:
 """
 
 # imports of used libraries
+from flask_socketio import SocketIO, send
+import redis
 import time
 import json
 import redis
 from config import Config
 from loguru import logger
+import threading
+
 from models.room import Room
 from models.user import User
 from models.message import *
 from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
+
 
 logger.remove()
 logger.add("log.log")
@@ -31,6 +36,9 @@ chat_bp = Blueprint('chat', __name__)
 
 # get redis connection
 redis = redis.StrictRedis(host=Config.host, port=Config.port, db=0)
+
+# set up socket
+socketio = SocketIO()
 
 # home route is the chatroom
 @chat_bp.route('/home', methods=['GET', 'POST'])
@@ -120,3 +128,47 @@ def getRoom(room_key):
         # create room object and fill it with all values
         tempRoom = Room(partnerA, partnerB, room_key,messages)
         return tempRoom
+
+"""
+@socketio.on('send_message')
+def handle_send_message(data):
+    room_id = data['room_id']
+    message = data['message']
+
+    #Process the message (e.g., store it in Redis)
+    #Broadcast the message to all connected clients in the room
+    socketio.emit('receive_message', {'room_id': room_id, 'message': message}, room=room_id)
+    r.publish(roomId, json.dumps(message_with_sender))
+"""
+"""
+@socketio.on('message')
+def handle_message(data):
+    if isinstance(data, str):
+        data = json.loads(data)
+    message = data.get('message')
+    sender = data.get('sender')
+    if message and sender:
+        message_with_sender = {
+            "sender": sender,
+            "message": message
+        }
+        r.publish('my-channel', json.dumps(message_with_sender))
+        send(message_with_sender, broadcast=True)
+
+def subscriber():
+    pubsub = r.pubsub()
+    pubsub.subscribe('my-channel')
+    for message in pubsub.listen():
+        if message['type'] == 'message':
+            data = message['data']
+            if isinstance(data, bytes):
+                data = data.decode('utf-8')
+            try:
+                data = json.loads(data)
+                print(f"Received message from {data['sender']}: {data['message']}")
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+
+def start_subscriber_thread():
+    threading.Thread(target=subscriber).start()
+"""
