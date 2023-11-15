@@ -1,14 +1,32 @@
-from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
+"""
+File: chat.py
+Author: Tim Steiner, Julian Bork, Felix Wilhelm, Marius Wergen
+Date: October 13, 2023
+Description: This script contains the routes for the chatroom.
+
+Usage:
+- Function home(): Renders the chat.html template.
+
+- Function getRoom(): Returns a Room object with all data from the room.
+
+- Function clickedRoom(): Renders the chat.html template with the selected room.
+"""
+
+# imports of used libraries
 from flask_socketio import SocketIO, send
-from models.room import Room
-from models.user import User
-from models.message import *
 import redis
 import time
 import json
+import redis
 from config import Config
 from loguru import logger
 import threading
+
+from models.room import Room
+from models.user import User
+from models.message import *
+from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
+
 
 logger.remove()
 logger.add("log.log")
@@ -46,6 +64,7 @@ def home():
         room_data.append((room_key, room_data))
     return render_template('chat.html', user_id=user_id, roomObjects = rooms, selectedRoom = selectedRoom)
 
+# route to render the chatroom when a room is clicked
 @chat_bp.route('/getClickedRoom', methods=['POST','GET'])
 def clickedRoom():
     roomId = request.args.get('roomId')
@@ -90,9 +109,16 @@ def getRoom(room_key):
         partnerB_data_json = redis.hget('users', partnerBId)
         partnerA_data = json.loads(partnerA_data_json.decode('utf-8'))
         partnerB_data = json.loads(partnerB_data_json.decode('utf-8'))
+
+        #avatarA = redis.zscore("avatars", partnerA_data['avatar'])
+        avatarA = redis.zrangebyscore("avatars", partnerA_data['avatar'], partnerA_data['avatar'])
+        avatarB = redis.zrangebyscore("avatars", partnerB_data['avatar'], partnerB_data['avatar'])
+        #avatarB = redis.zscore("avatars", partnerB_data['avatar'])
+
         # create User objects for both room partners
-        partnerA = User(partnerA_data.get('username', 'Default Name'),partnerA_data.get('email', 'Default Name'), partnerAId)
-        partnerB = User(partnerB_data.get('username', 'Default Name'),partnerB_data.get('email', 'Default Name'), partnerBId)
+        # HIER USER BILD EINFÜGEN
+        partnerA = User(partnerA_data.get('username', 'Default Name'),partnerA_data.get('email', 'Default Name'), partnerAId, avatarA)
+        partnerB = User(partnerB_data.get('username', 'Default Name'),partnerB_data.get('email', 'Default Name'), partnerBId, avatarB)
         messages = []
         # get all messages from the room
         for index in room_data[2:]:

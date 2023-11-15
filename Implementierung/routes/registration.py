@@ -1,10 +1,27 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
-import redis
+"""
+File: registration.py
+Author: Tim Steiner, Julian Bork, Felix Wilhelm, Marius Wergen
+Date: October 13, 2023
+Description: This script contains the routes for the registration page.
+
+Usage:
+- Function register(): Renders the registration.html template.
+
+- register is used for a user to register to the chatroom
+    - user has to enter email, username and password
+    - if email already exists, user has to login
+    - if email does not exist, password is checked and user is registered
+"""
+
+# imports of used libraries
 import json
+import redis
+import bcrypt
 from config import Config
 from loguru import logger
-import bcrypt
+from flask import Flask, Blueprint, render_template, request, redirect, url_for
 
+# remove default logger
 logger.remove()
 logger.add("log.log")
 
@@ -57,6 +74,8 @@ def register():
         if error!="":
             #if error occured redirect to registration page with error code
             return redirect(url_for('registration.register', error=error))
+        # get an avatar for the user
+        avatar_index = int(redis.get('user_id_counter')) % 8
         # get new user id (increment user_id_counter by 1)
         reg_user_id = redis.incr('user_id_counter')
 
@@ -69,7 +88,8 @@ def register():
             'email': reg_email,
             'username': reg_username,
             'password': reg_password_hash,
-            'rooms': []
+            'rooms': [],
+            'avatar': avatar_index
         }
         # save user data in redis db as stringified json object
         redis.hset("users", reg_user_id, json.dumps(user_data))

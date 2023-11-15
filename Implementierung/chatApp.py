@@ -1,3 +1,24 @@
+"""
+File: chatApp.py
+Author: Tim Steiner, Julian Bork, Felix Wilhelm, Marius Wergen
+Date: October 13, 2023
+Description: This script starts the whole Web Application.
+
+Usage:
+- Function main(): Starts the Web Application.
+
+- creates Flask app
+
+- registers blueprints
+
+- runs app
+"""
+
+# imports of used libraries
+from config import Config
+from routes.chat import chat_bp
+from routes.login import login_bp
+from routes.registration import registration_bp
 from flask import Flask, render_template, request, redirect, url_for
 
 from flask_socketio import SocketIO, send
@@ -5,13 +26,8 @@ import threading
 import redis
 import json
 import time
-from routes.chat import chat_bp, redis
+from routes.chat import redis
 from models.message import *
-
-from config import Config
-from routes.chat import chat_bp
-from routes.login import login_bp
-from routes.registration import registration_bp
 
 # connection to database
 pool = Config.pool

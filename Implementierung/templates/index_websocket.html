@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Redis Pub/Sub with WebSocket Example</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('message', function(data) {
+            var messageContainer = document.getElementById('messageContainer');
+            var newMessage = document.createElement('div');
+            newMessage.textContent = data.sender + ': ' + data.message;
+            messageContainer.appendChild(newMessage);
+        });
+
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var senderInput = document.getElementById('senderInput');
+            var message = messageInput.value;
+            var sender = senderInput.value;
+            socket.send(JSON.stringify({sender: sender, message: message}));
+            messageInput.value = '';
+        }
+    </script>
+</head>
+<body>
+    <h1>Flask Redis Pub/Sub with WebSocket Example</h1>
+
+    <div>
+        <input type="text" id="senderInput" placeholder="Your name">
+        <input type="text" id="messageInput" placeholder="Your message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div id="messageContainer"></div>
+</body>
+</html>
