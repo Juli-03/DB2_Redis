@@ -45,7 +45,7 @@ def handle_message(data):
             "timestamp": timestamp,
             "room_id": room_id
         }
-        r.publish(room_id, json.dumps(message_with_sender))
+        r.publish('all-rooms', json.dumps(message_with_sender))
         #send(message_with_sender, broadcast=True)
         json_data = json.dumps(message_with_sender, cls=MessageEncoder)
         redis.zadd(f"{room_id}", {json_data: timestamp})
@@ -53,7 +53,7 @@ def handle_message(data):
 
 def subscriber():
     pubsub = r.pubsub()
-    pubsub.subscribe('room:1:3')
+    pubsub.subscribe('all-rooms')
     for message in pubsub.listen():
         if message['type'] == 'message':
             data = message['data']
