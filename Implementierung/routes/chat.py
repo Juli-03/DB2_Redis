@@ -25,6 +25,7 @@ import threading
 from models.room import Room
 from models.user import User
 from models.message import *
+from datetime import datetime
 from flask import Flask, Blueprint, jsonify, render_template, request, redirect, url_for
 
 
@@ -88,8 +89,12 @@ def clickedRoom():
         message = request.form['message']
         # get current timestamp
         timestamp = int(time.time())
+        sender_data = redis.hget('users', user_id)
+        sender_json = json.loads(sender_data.decode('utf-8'))
+        avatarSender = redis.zrangebyscore("avatars", sender_json['avatar'], sender_json['avatar'])
+        sender = User(sender_json.get('username', 'Default Name'),sender_json.get('email', 'Default Name'), user_id, avatarSender)
         # message for stringified json object
-        message = Message(user_id, message, timestamp, roomId)
+        message = Message(user_id, message, timestamp, roomId,sender)
         # stringify the json data
         json_data = json.dumps(message, cls=MessageEncoder)
         #json_data = json.dumps(message_data)
@@ -122,9 +127,17 @@ def getRoom(room_key):
         messages = []
         # get all messages from the room
         for index in room_data[2:]:
-             messageJSON = json.loads(index[0].decode('utf-8'))
-             tempMessage = Message(messageJSON['user_id'],messageJSON['message'],messageJSON['timestamp'], messageJSON['room_id'])
-             messages.append(tempMessage)
+            messageJSON = json.loads(index[0].decode('utf-8'))
+            # convert the time
+            time_object = datetime.fromtimestamp(messageJSON['timestamp'])
+            # Format the datetime object as a string
+            formatted_time = time_object.strftime('%d/%m/%Y, %H:%M:%S')
+            sender_data = redis.hget('users', messageJSON['user_id'])
+            sender_json = json.loads(sender_data.decode('utf-8'))
+            avatarSender = redis.zrangebyscore("avatars", sender_json['avatar'], sender_json['avatar'])
+            sender = User(sender_json.get('username', 'Default Name'),sender_json.get('email', 'Default Name'), messageJSON['user_id'], avatarSender)
+            tempMessage = Message(messageJSON['user_id'],messageJSON['message'],formatted_time, messageJSON['room_id'],sender)
+            messages.append(tempMessage)
         # create room object and fill it with all values
         tempRoom = Room(partnerA, partnerB, room_key,messages)
         return tempRoom
