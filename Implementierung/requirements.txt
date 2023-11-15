@@ -6,3 +6,4 @@ bcrypt
 io
 pillow
 requests
+flask_socketio
