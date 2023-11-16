@@ -57,13 +57,15 @@ def home():
     room_data = []
     rooms = []
     selectedRoom = None
+    # get the name of the user
+    user_name = user_data.get('username', 'Default Name')
 
     for room_key in room_keys:
         tempRoom = getRoom(room_key)
         rooms.append(tempRoom)
         # Append the room data to the list
         room_data.append((room_key, room_data))
-    return render_template('chat.html', user_id=user_id, roomObjects = rooms, selectedRoom = selectedRoom)
+    return render_template('chat.html', user_id=user_id, user_name=user_name, roomObjects = rooms, selectedRoom = selectedRoom)
 
 # route to render the chatroom when a room is clicked
 @chat_bp.route('/getClickedRoom', methods=['POST','GET'])
@@ -76,6 +78,8 @@ def clickedRoom():
     user_data = json.loads(user_data_json.decode('utf-8'))
     # Fetch the "rooms" list from the user data
     room_keys = user_data.get('rooms', [])
+    # get the name of the user
+    user_name = user_data.get('username', 'Default Name')
     # Initialize an empty list to store the data from sorted sets
     rooms = []
     for room_key in room_keys:
@@ -101,7 +105,7 @@ def clickedRoom():
         logger.info(f"json_data: {json_data}")
         redis.zadd(f"{roomId}", {json_data: timestamp})
     # Render the chat.html template with the updated selectedRoom
-    return render_template('chat.html', user_id=user_id, roomObjects=rooms, selectedRoom=selectedRoom)
+    return render_template('chat.html', user_id=user_id, user_name=user_name, roomObjects=rooms, selectedRoom=selectedRoom)
 
 # help function to get all data from a room
 def getRoom(room_key):
