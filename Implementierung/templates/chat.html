@@ -205,8 +205,11 @@ Features:
 
         var url_string = window.location;
         var url = new URL(url_string);
-        var c = url.searchParams.get("roomId");
-        console.log(c)
+        var url_room_id = url.searchParams.get("roomId");
+        var url_parts = url_room_id.split(":")
+        var url_partnerA = url_parts[1];
+        var url_partnerB = url_parts[2];
+        var url_user_id = url.searchParams.get("userId");
 
         function submitForm(event) {
             event.preventDefault(); // Verhindert das Standardverhalten des Formulars
@@ -231,26 +234,109 @@ Features:
         //     newMessage.textContent = data.user_id + ': ' + data.message + document.domain + location.port;
         //     messageContainer.appendChild(newMessage);
         // });
-        socket.on('message', function(data) {
-            var messageContainer = document.getElementById('messageContainer');
-            var newMessageContainer = document.createElement('div');
-            newMessageContainer.className = 'chat-message-right pb-4'; // Füge die Klasse hinzu
+        if (url_room_id != undefined){
+            socket.on('message', function(data) {
+                var messageContainer = document.getElementById('messageContainer');
+                var newMessageContainer = document.createElement('div');
+                newMessageContainer.className = 'chat-message-right pb-4'; // Füge die Klasse hinzu
 
-            // Erstelle das innere HTML-Element ähnlich wie dein gewünschtes Beispiel
-            newMessageContainer.innerHTML = `
-                <div>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="${data.user_id}" width="40" height="40">
-                    <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
-                </div>
-                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                    <div class="font-weight-bold mb-1">${data.user_id}</div>
-                    ${data.message}
-                </div>
-            `;
+                
 
-            messageContainer.appendChild(newMessageContainer);
-        });
+                // Erstelle das innere HTML-Element ähnlich wie dein gewünschtes Beispiel
+                
+                /*
+                newMessageContainer.innerHTML = `
+                {% if selectedRoom is none %}
+                {% else %}
+                    <div>
+                        <img src="data:image/png;base64,{{ selectedRoom.partnerB.avatar }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">    
+                        <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
+                    </div>
+                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                        <div class="font-weight-bold mb-1">{{ selectedRoom.partnerB.name }}</div>
+                        ${data.message}
+                    </div>
+                {% endif %}
+                `;
+                
+                messageContainer.appendChild(newMessageContainer);
+                */
+               console.log("data.user_id: "+data.user_id)
+               console.log("url_user_id: "+url_user_id)
+               console.log("url_partnerA"+url_partnerA)
+               console.log("url_partnerB"+url_partnerB)
 
+
+                
+                if (data.user_id == url_user_id && data.user_id == url_partnerA){
+                    newMessageContainer.innerHTML = `
+                    {% if selectedRoom is none %}
+                    {% else %}
+                        <div>
+                            <img src="data:image/png;base64,{{ selectedRoom.partnerA.avatar }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">    
+                            <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                            <div class="font-weight-bold mb-1">Du</div>
+                            ${data.message}
+                        </div>
+                    {% endif %}
+                    `;
+                    console.log("Variante1")
+                    messageContainer.appendChild(newMessageContainer);
+                }else if (data.user_id == url_user_id && data.user_id == url_partnerB){
+                    newMessageContainer.innerHTML = `
+                    {% if selectedRoom is none %}
+                    {% else %}
+                        <div>
+                            <img src="data:image/png;base64,{{ selectedRoom.partnerB.avatar }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">    
+                            <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                            <div class="font-weight-bold mb-1">Du</div>
+                            ${data.message}
+                        </div>
+                    {% endif %}
+                    `;
+                    console.log("Variante2")
+                    messageContainer.appendChild(newMessageContainer);
+                }else if (data.user_id != url_user_id && data.user_id == url_partnerA){
+                    newMessageContainer.innerHTML = `
+                    {% if selectedRoom is none %}
+                    {% else %}
+                        <div>
+                            <img src="data:image/png;base64,{{ selectedRoom.partnerA.avatar }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">    
+                            <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                            <div class="font-weight-bold mb-1">{{ selectedRoom.partnerA.name }}</div>
+                            ${data.message}
+                        </div>
+                    {% endif %}
+                    `;
+                    console.log("Variante3")
+                    messageContainer.appendChild(newMessageContainer);
+                }else if (data.user_id != url_user_id && data.user_id == url_partnerB){
+                    newMessageContainer.innerHTML = `
+                    {% if selectedRoom is none %}
+                    {% else %}
+                        <div>
+                            <img src="data:image/png;base64,{{ selectedRoom.partnerB.avatar }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">    
+                            <div class="text-muted small text-nowrap mt-2">${new Date().toLocaleString()}</div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                            <div class="font-weight-bold mb-1">{{ selectedRoom.partnerB.name }}</div>
+                            ${data.message}
+                        </div>
+                    {% endif %}
+                    `;
+                    console.log("VAriante4")
+                    messageContainer.appendChild(newMessageContainer);
+                };
+                
+
+            });
+        }
         function sendMessage(event) {
             
             console.log(document.getElementById('message'))
