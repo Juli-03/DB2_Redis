@@ -65,7 +65,7 @@ def handle_message(data):
         #send(message_with_sender, broadcast=True)
         json_data = json.dumps(message_with_sender, cls=MessageEncoder)
         redis.zadd(f"{room_id}", {json_data: timestamp})
-        print(message_with_sender)
+        #print(message_with_sender)
 
 def subscriber():
     pubsub = r.pubsub()
@@ -77,9 +77,9 @@ def subscriber():
                 data = data.decode('utf-8')
             try:
                 data = json.loads(data)
-                print(f"Received message from {data['user_id']}: {data['message']}")
+                #print(f"Received message from {data['user_id']}: {data['message']}")
                 socketio.emit('message', data)
-                print("send data over to socket: ", data)
+                #print("send data over to socket: ", data)
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
 
