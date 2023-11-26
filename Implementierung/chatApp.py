@@ -11,6 +11,8 @@ Usage:
 
 - registers blueprints
 
+- handles storage and redis pubsub 
+
 - runs app
 """
 
@@ -44,16 +46,17 @@ app.register_blueprint(chat_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(registration_bp)
 
-#functions for pubishing and subscribing i´with redis and websocket
+#function that publishes incoming messages in redis pub/sub and saves them in their respectiv rooms 
 @socketio.on('message')
 def handle_message(data):
+    #loads the data received through the websocket
     if isinstance(data, str):
         data = json.loads(data)
     message = data.get('message')
     sender = data.get('user_id')
     timestamp = int(time.time())
     room_id = data.get('room_id')
-    
+    #create json to publish and store in redis 
     if message and sender:
         message_with_sender = {
             "user_id": sender,
@@ -61,35 +64,35 @@ def handle_message(data):
             "timestamp": timestamp,
             "room_id": room_id
         }
+        #publishing the json in redis pub/sub
         r.publish('all-rooms', json.dumps(message_with_sender))
-        #send(message_with_sender, broadcast=True)
+        #processes json to store in redis db
         json_data = json.dumps(message_with_sender, cls=MessageEncoder)
+        #store json with room_id, message with other components in json format and the timestamp
         redis.zadd(f"{room_id}", {json_data: timestamp})
-        #print(message_with_sender)
 
+#function that handels the incoming messages from redis pub/sub
 def subscriber():
+    #initializes redis pub/sub
     pubsub = r.pubsub()
+    #subscribes to the pub/sub room
     pubsub.subscribe('all-rooms')
+    #listens if any messages have been send to the room
     for message in pubsub.listen():
         if message['type'] == 'message':
             data = message['data']
             if isinstance(data, bytes):
                 data = data.decode('utf-8')
             try:
+                #loads the received message in the json format
                 data = json.loads(data)
-                #print(f"Received message from {data['user_id']}: {data['message']}")
+                #sends the json to the websocket so it can be shared with the frontend
                 socketio.emit('message', data)
-                #print("send data over to socket: ", data)
+
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
 
-# default route = run app
+
 if __name__ == '__main__':
-    #app.run(debug=True)
-    #threading.Thread(target=subscriber).start()
     threading.Thread(target=subscriber).start()
     socketio.run(app, debug=True)
-
-
-
-# Überlegung:    Schreiben der historischen Chats auch über den Websocket
