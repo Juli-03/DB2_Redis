@@ -35,7 +35,6 @@ redis = redis.StrictRedis(host=Config.host, port=Config.port, db=0)
 @registration_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        # TODO perform validation
         
         # get user info from input fields
         reg_email = request.form['reg_email']

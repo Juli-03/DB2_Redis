@@ -70,7 +70,6 @@ def handle_message(data):
         json_data = json.dumps(message_with_sender, cls=MessageEncoder)
         #store json with room_id, message with other components in json format and the timestamp
         redis.zadd(f"{room_id}", {json_data: timestamp})
-        
 
 #function that handels the incoming messages from redis pub/sub
 def subscriber():
@@ -89,6 +88,7 @@ def subscriber():
                 data = json.loads(data)
                 #sends the json to the websocket so it can be shared with the frontend
                 socketio.emit('message', data)
+
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
 

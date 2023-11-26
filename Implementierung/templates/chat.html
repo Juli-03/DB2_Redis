@@ -35,6 +35,10 @@ Features:
                 }
             </style>
             <h1 class="h3 mb-3" data-user-id = "{{ user_id }}">Willkommen, {{ user_name }} - Viel Spaß beim Chatten mit deinen Freunden!</h1>
+            <div class="input-group" style="display: none;" id="stresstest">
+                <button class="btn btn-primary" type="submit" onclick="stressTest()">Starte Stresstest</button>
+            </div>
+
             <div class="card">
                 <div class="row g-0">
                     <div class="col-12 col-lg-5 col-xl-3 border-right">
@@ -75,12 +79,20 @@ Features:
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">
                         {% if selectedRoom is none %}
+                        <script>
+                            //hide div stress test
+                            document.getElementById("stresstest").style.display = "none";
+                        </script>
                         <div class="d-flex justify-content-center align-items-center" style="min-height: 30vh;">
                             <div>
                                 <strong>Klick auf einen Kontakt, um einen Chat zu beginnen!</strong>
                             </div>
                         </div>
                         {% else %}
+                        <script>
+                            //show div stress test
+                            document.getElementById("stresstest").style.display = "block";
+                        </script>
 
                         <div class="py-2 px-4 border-bottom d-none d-lg-block" data-room-id = "{{ selectedRoom.roomId }}">
                           {% if not selectedRoom.partnerA.userId|string() == user_id %}
@@ -164,7 +176,7 @@ Features:
                                     <input type="text" class="form-control" placeholder="Type your message" name="message" id="message">
                                     <button class="btn btn-primary" type="submit">senden</button>
                                 </div>
-                            </form>
+                          </form>
                         </div>
                     {% endif %}
                     </div>
@@ -299,6 +311,43 @@ Features:
             socket.send(JSON.stringify({user_id: userId, message: message, room_id: room_id}));
             messageInput.value = '';
         }
+
+        // function stresstest->starts stress test
+        function stressTest(event){
+            var startTime = new Date().getTime();
+
+            // Zielzeit: Startzeit + 10 Sekunden in Millisekunden
+            var endTime = startTime + 10000;
+            numberOfMessages = 0;
+            do{
+                message = generateRandomText();
+                
+                var userId = document.querySelector('[data-user-id]').getAttribute('data-user-id');
+                
+                var url_string = window.location;
+                var url = new URL(url_string);
+                var room_id = url.searchParams.get("roomId");
+        
+                socket.send(JSON.stringify({user_id: userId, message: message, room_id: room_id}));
+                numberOfMessages++;
+                currentTime = new Date().getTime();
+            }while(currentTime < endTime);
+            console.log(numberOfMessages);
+        }
+
+        function generateRandomText() {
+            // Array mit möglichen Textelementen
+            var textElements = ["Hallo", "Redis", "Schneller", "Datenbanken", "Marius", "Tim", "Felix", "Julian"];
+
+            // Zufälligen Index auswählen
+            var randomIndex = Math.floor(Math.random() * textElements.length);
+
+            // Zufälligen Textelement auswählen
+            var randomText = textElements[randomIndex];
+
+            return randomText;
+        }
+
     </script>
 </body>
 </html>
