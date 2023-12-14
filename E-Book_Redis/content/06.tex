@@ -1,5 +1,4 @@
 %!TEX root = ../dokumentation.tex
-\section{Architektur}
 
 \subsection{In Memory}
 Redis zählt zu den sogenannten In-Memory-Datenbanken oder kurz IMDB. 
@@ -22,25 +21,3 @@ Der zweite Nachteil bezieht sich auf die Speichereigenschaften des RAMs.
 Dieser ist nämlich im Gegensatz zu Festplattenspeichern nicht persistent.
 Das bedeutet, dass die Daten im RAM nur solange erhalten bleiben, wie dieser mit Strom versorgt wird.
 Fällt die Stromversorgung aus, gehen also alle Daten aus dem RAM verloren. 
-
-\subsection{Persistenz}
-Um das Problem der fehlenden Persistenz zu lösen, bietet Redis verschiedene Möglichkeiten an.
-Eine dieser Möglichkeiten wird als \textit{Redis Database} (RDB) bezeichnet \cite{Redis-Docs-Persistenz}. 
-Demzugrunde liegt ein Snapshot-Verfahren, bei dem der aktuelle Zustand der Datenbank in regelmäßigen Abständen in einer Datei auf einer Festplatte gespeichert wird.
-Diese regelmäßigen Abstände können bei der Konfiguration der Datenbank festgelegt werden. 
-Bei einem Ausfall der Datenbank kann diese Datei dann wieder schnell eingelesen werden oder falls nötig auch auf einen anderen Server übertragen werden.
-
-Eine weitere Möglichkeit ist das sogenannte \textit{Append Only File} (AOF) \cite{Redis-Docs-Persistenz}. 
-Dabei handelt es sich um eine Log-Datei, in der alle Änderungen an der Datenbank in Form von Änderungs-Befehlen auf einer Festplatte gespeichert werden.
-Auch hier gibt es die Möglichkeit, die Häufigkeit der Speicherung festzulegen. Es kann zwischen der Standardmäßigen \textit{Every-Second}-Option, der \textit{Every-Change}-Option und der \textit{No}-Option gewählt werden.
-
-Zusätzlich kann man auch beide genannte Optionen kombinieren \cite{Redis-Docs-Persistenz}.
-Abhängig von den Daten, die im System gespeichert werden, muss die Häufigkeit der Absicherung festgelegt werden.
-Dabei gilt es immer einen Kompromiss zwischen Sicherheit und Geschwindigkeit zu finden.
-Denn je häufiger eine Datensicherung durchgeführt wird, desto mehr Ressourcen des Rechners werden dafür benötigt und desto langsamer wird die Datenbank.
-
-
-
-\subsection{Client-Server}
-
-\subsection{Skalierung}
