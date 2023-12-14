@@ -1,0 +1,46 @@
+%!TEX root = ../dokumentation.tex
+\section{Architektur}
+
+\subsection{In Memory}
+Redis zählt zu den sogenannten In-Memory-Datenbanken oder kurz IMDB. 
+Das bedeutet, dass alle Daten zur Laufzeit im Arbeitsspeicher (RAM) des Servers liegen.
+Dieses Vorgehen verhilft Redis zu seinem größten Vorteil: der Geschwindigkeit.
+
+Denn im Vergleich zu anderen Datenbanksystemen, deren Datenspeicherung üblicherweise auf Festplatten stattfindet, ist das Lesen und Schreiben von Daten in den RAM um ein vielfaches schneller \cite{VL_Rechnerarchitektur}.
+Dadurch ist Redis in der Lage eine sehr hohe Anzahl an Operationen pro Sekunde zu verarbeiten.
+Bei dem in Redis integrierten Benchmark-Test, der mit dem Befehl \textit{redis-benchmark} ausgeführt werden kann, erreicht Redis auf einem 2021er MacBook Air, 180000 Schreiboperationen und über 200000 Leseoperationen pro Sekunde (vgl. \autoref{fig:redis-benchmark}).
+Hierbei ist zu beachten, dass die Geschwindigkeit der Datenbank natürlich sowohl von der benutzten Hardware als auch der Größe der Daten abhängt.
+Besonders die CPU wird bei der Verarbeitung von Daten stark beansprucht. Da Redis selbst allerdings nicht parallel arbeitet, ist die Anzahl der CPU-Kerne nicht ausschlaggebend für die Geschwindigkeit \cite{Redis-Docs-Benchmarks}.
+Dementsprechend ist es denkbar, dass die Geschwindigkeit mit potenterer Hardware, sowie sie in großen Serversystemen zum Einsatz kommt, noch weiter gesteigert werden kann.
+
+Der Vorteil der Geschwindigkeit, den man sich durch die Verwendung einer IMDB verschafft, ist jedoch mit zwei großen Nachteilen gekoppelt.
+Der erste Nachteil ist rein monitärer Natur. 
+Denn RAM ist im Vergleich zu Festplattenspeicher sehr teuer. Für das gleiche Geld bekommt man nur einen Bruchteil an Speicherplatz.
+Außerdem ist die maximale Größe des Arbeitsspeichers in einem Server aufgrund von technischen Einschränkungen begrenzt.
+
+Der zweite Nachteil bezieht sich auf die Speichereigenschaften des RAMs.
+Dieser ist nämlich im Gegensatz zu Festplattenspeichern nicht persistent.
+Das bedeutet, dass die Daten im RAM nur solange erhalten bleiben, wie dieser mit Strom versorgt wird.
+Fällt die Stromversorgung aus, gehen also alle Daten aus dem RAM verloren. 
+
+\subsection{Persistenz}
+Um das Problem der fehlenden Persistenz zu lösen, bietet Redis verschiedene Möglichkeiten an.
+Eine dieser Möglichkeiten wird als \textit{Redis Database} (RDB) bezeichnet \cite{Redis-Docs-Persistenz}. 
+Demzugrunde liegt ein Snapshot-Verfahren, bei dem der aktuelle Zustand der Datenbank in regelmäßigen Abständen in einer Datei auf einer Festplatte gespeichert wird.
+Diese regelmäßigen Abstände können bei der Konfiguration der Datenbank festgelegt werden. 
+Bei einem Ausfall der Datenbank kann diese Datei dann wieder schnell eingelesen werden oder falls nötig auch auf einen anderen Server übertragen werden.
+
+Eine weitere Möglichkeit ist das sogenannte \textit{Append Only File} (AOF) \cite{Redis-Docs-Persistenz}. 
+Dabei handelt es sich um eine Log-Datei, in der alle Änderungen an der Datenbank in Form von Änderungs-Befehlen auf einer Festplatte gespeichert werden.
+Auch hier gibt es die Möglichkeit, die Häufigkeit der Speicherung festzulegen. Es kann zwischen der Standardmäßigen \textit{Every-Second}-Option, der \textit{Every-Change}-Option und der \textit{No}-Option gewählt werden.
+
+Zusätzlich kann man auch beide genannte Optionen kombinieren \cite{Redis-Docs-Persistenz}.
+Abhängig von den Daten, die im System gespeichert werden, muss die Häufigkeit der Absicherung festgelegt werden.
+Dabei gilt es immer einen Kompromiss zwischen Sicherheit und Geschwindigkeit zu finden.
+Denn je häufiger eine Datensicherung durchgeführt wird, desto mehr Ressourcen des Rechners werden dafür benötigt und desto langsamer wird die Datenbank.
+
+
+
+\subsection{Client-Server}
+
+\subsection{Skalierung}

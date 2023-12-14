@@ -11,3 +11,18 @@ dokumentation.pdf
 *.DS_Store
 *.log
 *.pyc
+# latex
+*.log
+*.aux
+*.lof
+*.lot
+*.glo
+*.bbl
+*.bcf
+*.toc
+*.blg
+*.fdb_latexmk
+*.fls
+*run_xml
+E-Book_Redis/dokumentation.run.xml
+
