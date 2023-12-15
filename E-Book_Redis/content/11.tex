@@ -1,3 +1,37 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Installation und Betriebssysteme}
+
+\acs{Redis} ist in \textit{ANSI C} geschrieben und funktioniert somit auf den meisten \acs{POSIX} Systemen, wie z.B. \textit{Linux} oder \textit{macOS} (vgl. ). \acs{POSIX} steht für \textit{Portable Operating System Interface} und umfasst eine Menge an Standards für \textit{UNIX}-Derivate (vgl. ). In der offiziellen \ac{Redis}-Dokumentation heißt es: \glqq \textit{we recommend using Linux for deployment}\grqq (), die Entwickler empfehlen also \textit{Linux} eher als \textit{macOS}.
+
+Es gibt keine offizielle Unterstützung für \textit{Windows} (vgl. ). Allerdings ist es möglich, \ac{WSL2} auf \textit{Windows} zu installieren. Damit können \textit{Linux}-Binärdateien auf \textit{Windows} ausgeführt werden (vgl. ). Alternativ kann auch \textit{Ubuntu} auf \textit{Windows} virtualisiert werden. Es existieren unoffizielle \ac{Redis}-Versionen für \textit{Windows}, die allerdings nicht der Produktionsqualität entsprechen, wie Versionen für \textit{Linux} oder \textit{macOS} (vgl. 4, S.16). 
+
+Für die Installation gibt es zwei Möglichkeiten. Entweder man installiert nur \ac{Redis} oder den \ac{Redis}-Stack (vgl. ). Der \ac{Redis}-Stack erweitert den standard \ac{Redis}-Download um folgende Features (vgl. ):
+
+\begin{itemize}
+	\item \ac{JSON}
+	\item \textit{Search and Query}
+	\item \textit{Time Series}
+	\item \textit{Bloom Filter}
+\end{itemize}
+
+\ac{JSON}, \textit{Time Series} und \textit{Bloom Filter} sind \ac{Redis}-spezifische Datentypen, die in Kapitel TODO erklärt werden. \textit{Search and Query} ist eine Reihe an Möglichkeiten, um einfache und effiziente Abfragen an den \ac{Redis}-Server zu stellen (vgl. ). Beispielsweise ist mit \textit{Search and Query} eine simple Indexierung von \ac{JSON}-Objekten möglich (vgl. ). Ebenfalls kann der Nutzer damit Aggregationen durchführen, wie z.B. das Gruppieren oder Sortieren von Abfragen (vgl. ).  
+
+Unter \textit{Linux} lassen sich \ac{Redis} oder der \ac{Redis}-Stack über einen der folgenden Terminalbefehle installieren:
+
+\texttt{sudo apt-get install redis}
+
+\texttt{sudo apt-get install redis-stack-server}
+
+\vspace{0.4cm}
+
+Auf \textit{macOS} können \ac{Redis} und der \ac{Redis}-Server einfach per \textit{brew} installiert werden:
+
+\texttt{brew install redis}
+
+\texttt{brew install redis-stack}
+
+\vspace{0.4cm}
+
+
+
