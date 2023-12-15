@@ -1,3 +1,22 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Key-Value Datenbank}
+Wie bereits erläutert handelt es sich bei \acs{Redis} um eine \acs{NoSQL-Datenbank} (vgl. Abschnitt \ref{Geschichte}). Aus diesem Grund erfüllt sie die obligatorischen Eigenschaft einer solchen Datenbank. Diese sind: 
+\begin{itemize}
+	\item kein relationales Schema
+	\item Ausrichtung auf verteilte und horizontale Skalierbarkeit 
+	\item Schwache oder keine Schema-Restriktionen 
+	\item Einfache Datenreplikation 
+	\item Einfacher Zugriff über eine Programmierschnittstelle
+	\item Anderes Konsistenzmodell als \gls{acid}
+\end{itemize}
+(vgl. \cite{2016sql}, S.222). Bei \acp{NoSQL-Datenbank} wird zwischen verschiedenen Modellen unterschieden. \acs{Redis} zählt zu den \glspl{kvDB}. Diese Ausprägung der \acs{NoSQL-Datenbank} soll im folgenden analysiert werden. 
+
+Die einfachste Herangehensweise, um Daten zu speichern, ist die Zuweisung eines Wertes zu einem Schlüssel (vgl. \cite{2016sql}, S.223). Diese Eigenschaft nutzt eine \gls{kvDB}. Sie ist definiert als eine Datenbank, die:
+\begin{itemize}
+	\item  eine Menge von identifizierenden Datenobjekten (Schlüssel) besitzt,
+	\item  zu jedem Schlüssel genau ein assoziiertes deskriptives Datenobjekt, welches den Wert zum zugehörigen Schlüssel darstellt, besitzt
+	\item und mit der Angabe des Schlüssels der zugehörige Wert aus der Datenbank abgefragt werden kann
+\end{itemize}
+(vgl. \cite{2016sql}, S.224). Bei der Speicherung von Daten wird aus dem Schlüssel ein \gls{hash} berechnet. Mithilfe von diesem wird entschieden auf welchem Shard der Schlüssel gespeichert wird (ABSCHNITT SHARDING VERLINKEN).
+\\Diese Vorgehensweise bringt einige Vorteile mit sich. 
