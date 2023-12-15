@@ -1,3 +1,23 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Client-Server}
+\label{sec:Client-Server}
+% Client-Server-Bild
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.48\textwidth]{images/Client-Server.png}
+    \caption{Client-Server-Modell, \cite[23]{Bengel2014}}
+    \label{fig:Client-Server}
+\end{wrapfigure}
+Die Kommunikation in Redis funktioniert nach dem Client-Server-Modell.
+Dieses Architektur funktioniert, wie in \autoref{fig:Client-Server} dargestellt.
+Es gibt mehrere Clients, die mit einem Server kommunizieren. 
+Clients selbst können jedoch nicht direkt miteinander kommunizieren.
+Dementsprechend läuft jegliche Kommunikation immer über den Server.
+Der Server erhält Nachrichten beziehungsweise Befehle von den Redis-Clients und verarbeitet diese. 
+Je nach Anfrage sendet der Server dann die entsprechende Antwort zurück an einen Client oder mehrere Clients gleichzeitig.
+
+Das besondere der Redis-Architektur ist, dass es in verteilten Redis-Systemen nicht nur einen, sondern mehrere Server geben kann.
+
+
+

@@ -1,6 +1,7 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Persistenz}
+\label{sec:Persistenz}
 Um das Problem der fehlenden Persistenz zu lösen, bietet Redis verschiedene Möglichkeiten an.
 Eine dieser Möglichkeiten wird als \textit{Redis Database} (RDB) bezeichnet \cite{Redis-Docs-Persistenz}. 
 Demzugrunde liegt ein Snapshot-Verfahren, bei dem der aktuelle Zustand der Datenbank in regelmäßigen Abständen in einer Datei auf einer Festplatte gespeichert wird.
@@ -9,9 +10,19 @@ Bei einem Ausfall der Datenbank kann diese Datei dann wieder schnell eingelesen 
 
 Eine weitere Möglichkeit ist das sogenannte \textit{Append Only File} (AOF) \cite{Redis-Docs-Persistenz}. 
 Dabei handelt es sich um eine Log-Datei, in der alle Änderungen an der Datenbank in Form von Änderungs-Befehlen auf einer Festplatte gespeichert werden.
+Da eine solche Log-Datei theoretisch mit jedem weiteren Befehl wachsen würde und so unendlich groß werden könnte, gibt es einen Mechanismus, der dies verhindert.
+Dabei wird in regelmäßigen Abständen ein neuer Ausgangszustand der Datenbank gespeichert, von dem aus eine neue Log-Datei aufgebaut wird. 
+Solange die neue Log-Datei aufgebaut wird, werden alle Befehle dennoch weiterhin in die alte Log-Datei geschrieben, um sicherzustellen, dass bei einem Ausfall während des Aufbaus der neuen Log-Datei keine Daten verloren gehen.
+Sobald die neue Log-Datei fertig aufgebaut ist, wird die alte Log-Datei gelöscht und die neue Log-Datei wird als aktuelle Log-Datei verwendet.
+Mit diesem Mechanismus wird garantiert, dass sich die größe einer Log-Datei immer in einem bestimmten Rahmen hält und gleichzeitig die Daten zur jeder Zeit gesichert sind.
 Auch hier gibt es die Möglichkeit, die Häufigkeit der Speicherung festzulegen. Es kann zwischen der Standardmäßigen \textit{Every-Second}-Option, der \textit{Every-Change}-Option und der \textit{No}-Option gewählt werden.
 
+Im Vergleich zur RDB-Methode benötigt die AOF-Methode tendenziell mehr Speicherplatz und kann besonders während des Aufbaus einer neuen Log-Datei zu einer höheren RAM-Auslastung führen, was die Performance der Datenbank beeinträchtigen kann.
 Zusätzlich kann man auch beide genannte Optionen kombinieren \cite{Redis-Docs-Persistenz}.
+
 Abhängig von den Daten, die im System gespeichert werden, muss die Häufigkeit der Absicherung festgelegt werden.
 Dabei gilt es immer einen Kompromiss zwischen Sicherheit und Geschwindigkeit zu finden.
-Denn je häufiger eine Datensicherung durchgeführt wird, desto mehr Ressourcen des Rechners werden dafür benötigt und desto langsamer wird die Datenbank.
+Denn je häufiger eine Datensicherung durchgeführt wird, desto mehr Ressourcen des Rechners werden dafür benötigt und desto langsamer wird die Datenbank tendenziell.
+Wenn also ein Datenverslust z.B für die letzten Sekunden in Kauf genommen werden kann, dann kann die Häufigkeit der Datensicherung entsprechend angepasst werden.
+
+
