@@ -1,8 +1,8 @@
 \babel@toc {ngerman}{}\relax 
-\contentsline {chapter}{\nonumberline Abkürzungsverzeichnis}{V}{chapter*.4}%
-\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{VI}{chapter*.5}%
-\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.6}%
-\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.7}%
+\contentsline {chapter}{\nonumberline Abkürzungsverzeichnis}{VI}{chapter*.4}%
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{VII}{chapter*.5}%
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VIII}{chapter*.6}%
+\contentsline {chapter}{\nonumberline Listings}{IX}{chapter*.7}%
 \contentsline {chapter}{\numberline {1}Einführung}{1}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Literatur-Review}{2}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Geschichte}{2}{section.2.1}%
@@ -15,23 +15,23 @@
 \contentsline {section}{\numberline {2.3}Methoden und Funktionsweise}{6}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Installation und Betriebssysteme}{6}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Redis-Tools}{8}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Datentypen}{8}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Publisher und Subscriber}{8}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Bezug zum CAP-Theorem}{8}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Bewertung}{8}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Vorteile}{8}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Nachteile}{8}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{8}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Antipattern}{8}{subsection.2.5.4}%
-\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{9}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{9}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Umsetzung}{12}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{12}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{12}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Performance-Test}{12}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{13}{chapter.5}%
-\contentsline {chapter}{\nonumberline Literatur}{14}{chapter*.18}%
-\contentsline {chapter}{Glossar}{16}{section*.19}%
-\contentsline {chapter}{\nonumberline Anhang}{17}{chapter*.21}%
+\contentsline {subsection}{\numberline {2.3.3}Datentypen}{9}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Publisher und Subscriber}{9}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Bezug zum CAP-Theorem}{9}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Bewertung}{9}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Vorteile}{9}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Nachteile}{9}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{9}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Antipattern}{9}{subsection.2.5.4}%
+\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{10}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{10}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{10}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{13}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Performance-Test}{13}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{14}{chapter.5}%
+\contentsline {chapter}{\nonumberline Literatur}{15}{chapter*.22}%
+\contentsline {chapter}{Glossar}{17}{section*.23}%
+\contentsline {chapter}{\nonumberline Anhang}{18}{chapter*.25}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
