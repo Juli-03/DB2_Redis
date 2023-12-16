@@ -56,4 +56,4 @@ In der folgenden Abbildung wird das Zusammenspiel der verschiedenen Daten visual
 
 In der Abbildung wird ein beispielhafter User \textit{Jens} betrachtet. Die Daten zu diesem User befinden sich im \textit{user}-Hash. Identifiziert wird der konkrete Hash, der \textit{Jens} repräsentiert, durch die ID \textit{1}. Jens hat einen Chatraum. Dieser ist zwischen ihm und dem User mit der ID \textit{2}. Wie bereits erwähnt ist jeder Raum ein eigenes \textit{Sorted-Set}, welches durch die zwei Teilnehmer identifiziert wird. Somit können mithilfe der Werte aus dem \textit{rooms} Feld \textit{Jens} Räume identifiziert und anschließend ausgelesen werden.
 
-Jeder User hat das Feld \textit{avatar}, welches einen Integerwert enthält. Dieser Wert ist die Nummer des zugehörigen Avatars. \textit{Jens} hätte beispielsweise den Avatar mit dem Wert \textit{1}.
+Jeder User hat das Feld \textit{avatar}, welches einen Integerwert enthält. Dieser Wert ist die Nummer des zugehörigen Avatars. \textit{Jens} hätte beispielsweise den Avatar mit dem Wert \textit{1}. Mithilfe dieser Information kann der korrekte Avatar in der Anwendung geladen werden und angezeigt werden.

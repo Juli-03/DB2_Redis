@@ -9,29 +9,29 @@
 \contentsline {section}{\numberline {2.2}Architektur}{3}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Key-Value Datenbank}{3}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}In Memory}{4}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Persistenz}{4}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Client-Server}{5}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.3}Persistenz}{5}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Client-Server}{6}{subsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.2.5}Skalierung}{6}{subsection.2.2.5}%
-\contentsline {section}{\numberline {2.3}Methoden und Funktionsweise}{6}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Installation und Betriebssysteme}{6}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Redis-Tools}{8}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Datentypen}{9}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Publisher und Subscriber}{9}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Bezug zum CAP-Theorem}{9}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Bewertung}{9}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Vorteile}{9}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Nachteile}{9}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{9}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Antipattern}{9}{subsection.2.5.4}%
-\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{10}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{10}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{10}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Umsetzung}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{13}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{13}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Performance-Test}{13}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{14}{chapter.5}%
-\contentsline {chapter}{\nonumberline Literatur}{15}{chapter*.22}%
-\contentsline {chapter}{Glossar}{17}{section*.23}%
-\contentsline {chapter}{\nonumberline Anhang}{18}{chapter*.25}%
+\contentsline {section}{\numberline {2.3}Methoden und Funktionsweise}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Installation und Betriebssysteme}{7}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Redis-Tools}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Datentypen}{10}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Publisher und Subscriber}{12}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Bezug zum CAP-Theorem}{12}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Bewertung}{12}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Vorteile}{12}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Nachteile}{12}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{12}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Antipattern}{12}{subsection.2.5.4}%
+\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{13}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{16}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{16}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Performance-Test}{16}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{17}{chapter.5}%
+\contentsline {chapter}{\nonumberline Literatur}{18}{chapter*.22}%
+\contentsline {chapter}{Glossar}{21}{section*.23}%
+\contentsline {chapter}{\nonumberline Anhang}{22}{chapter*.25}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
