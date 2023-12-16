@@ -1,3 +1,8 @@
 %!TEX root = ../dokumentation.tex
 
 \section{Performance-Test}
+\label{sec:Performance}
+Bei dem in Redis integrierten Benchmark-Test, der mit dem Befehl \textit{redis-benchmark} ausgeführt werden kann, erreicht Redis auf einem 2021er MacBook Air, 180000 Schreiboperationen und über 200000 Leseoperationen pro Sekunde (vgl. \autoref{fig:redis-benchmark}).
+Hierbei ist zu beachten, dass die Geschwindigkeit der Datenbank natürlich sowohl von der benutzten Hardware als auch der Größe der Daten abhängt.
+Besonders die CPU wird bei der Verarbeitung von Daten stark beansprucht. Da Redis selbst allerdings nicht parallel arbeitet, ist die Anzahl der CPU-Kerne nicht ausschlaggebend für die Geschwindigkeit \cite{Redis-Docs-Benchmarks}.
+Dementsprechend ist es denkbar, dass die Geschwindigkeit mit potenterer Hardware, sowie sie in großen Serversystemen zum Einsatz kommt, noch weiter gesteigert werden kann.

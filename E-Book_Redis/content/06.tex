@@ -2,18 +2,15 @@
 
 \subsection{In Memory}
 \label{sec:inMemory}
-Redis zählt zu den sogenannten In-Memory-Datenbanken oder kurz IMDB. 
+Redis zählt zu den sogenannten In-Memory-Datenbanken oder kurz \acs{IMDB}. 
 Das bedeutet, dass alle Daten zur Laufzeit im Arbeitsspeicher (RAM) des Servers liegen.
 Dieses Vorgehen verhilft Redis zu seinem größten Vorteil: der Geschwindigkeit.
 
 Denn im Vergleich zu anderen Datenbanksystemen, deren Datenspeicherung üblicherweise auf Festplatten stattfindet, ist das Lesen und Schreiben von Daten in den RAM um ein vielfaches schneller \cite{VL_Rechnerarchitektur}.
 Dadurch ist Redis in der Lage eine sehr hohe Anzahl an Operationen pro Sekunde zu verarbeiten.
-Bei dem in Redis integrierten Benchmark-Test, der mit dem Befehl \textit{redis-benchmark} ausgeführt werden kann, erreicht Redis auf einem 2021er MacBook Air, 180000 Schreiboperationen und über 200000 Leseoperationen pro Sekunde (vgl. \autoref{fig:redis-benchmark}).
-Hierbei ist zu beachten, dass die Geschwindigkeit der Datenbank natürlich sowohl von der benutzten Hardware als auch der Größe der Daten abhängt.
-Besonders die CPU wird bei der Verarbeitung von Daten stark beansprucht. Da Redis selbst allerdings nicht parallel arbeitet, ist die Anzahl der CPU-Kerne nicht ausschlaggebend für die Geschwindigkeit \cite{Redis-Docs-Benchmarks}.
-Dementsprechend ist es denkbar, dass die Geschwindigkeit mit potenterer Hardware, sowie sie in großen Serversystemen zum Einsatz kommt, noch weiter gesteigert werden kann.
+Genaueres über die Performance wird später in \autoref{sec:Performance} erläutert.
 
-Der Vorteil der Geschwindigkeit, den man sich durch die Verwendung einer IMDB verschafft, ist jedoch mit zwei großen Nachteilen gekoppelt.
+Der Vorteil der Geschwindigkeit, den man sich durch die Verwendung einer \acs{IMDB} verschafft, ist jedoch mit zwei großen Nachteilen gekoppelt.
 Der erste Nachteil ist rein monitärer Natur. 
 Denn RAM ist im Vergleich zu Festplattenspeicher sehr teuer. Für das gleiche Geld bekommt man nur einen Bruchteil an Speicherplatz.
 Außerdem ist die maximale Größe des Arbeitsspeichers in einem Server aufgrund von technischen Einschränkungen begrenzt.
