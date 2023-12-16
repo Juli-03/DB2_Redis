@@ -2446,6 +2446,11 @@
     <bcf:citekey order="93" intorder="1">Redis-Docs-Anwen</bcf:citekey>
     <bcf:citekey order="94" intorder="1">Redis-Docs-cache</bcf:citekey>
     <bcf:citekey order="95" intorder="1">Redis-Docs-leaderboard</bcf:citekey>
+    <bcf:citekey order="96" intorder="1">antipattern</bcf:citekey>
+    <bcf:citekey order="97" intorder="1">Redis-Docs-antipattern</bcf:citekey>
+    <bcf:citekey order="98" intorder="1">Redis-Docs-antipattern</bcf:citekey>
+    <bcf:citekey order="99" intorder="1">Redis-Docs-antipattern</bcf:citekey>
+    <bcf:citekey order="100" intorder="1">Redis-Docs-antipattern</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
