@@ -11,3 +11,26 @@ Eine Menge an Strings wird in \ac{Redis} als \textbf{Liste} bezeichnet. Diese wi
 
 Ein \textbf{Set} ist eine ungeordnete Menge an Strings (vgl. \cite{4}, S.36-39). Im Set sind keine Duplikate erlaubt (vgl. \cite{nosql}, S.86). Die maximale Anzahl der Elemente im Set ist, wie bei Listen, auf $2^{32} - 1$ Elemente begrenzt (vgl. \cite{4}, S.36-39). Der Vorteil gegenüber Listen ist, dass der Anwender auf Elemente im Set lesend oder schreibend in $\mathcal{O}(1)$ zugreifen kann (vgl. \cite{4}, S.36-39). Sets werden häufig genutzt, um Indexe zu speichern (vgl. \cite{4}, S.36-39) oder eine Menge in der die Strings sowieso einzigartig sind (vgl. \cite{Redis-Docs-Set}).
 
+\textbf{Sorted Sets} sind eine Erweiterung der Sets. Auch im Sorted Set wird eine Menge an einzigartigen Strings gespeichert (vgl. \cite{4}, S.36-39). Dabei erhält jedes Element eine Ordnung, die Score genannt wird (vgl. \cite{Redis-Docs-SoSe}). Der Score wird genutzt, um die Elemente zu sortieren, vom kleinsten Score an aufsteigend (vgl. \cite{nosql}, S.86). Wenn zwei Strings denselben Score haben, werden sie alphabetisch sortiert (vgl. \cite{Redis-Docs-SoSe}). Durch die Sortierung haben Operationen auf Sorted Sets eine Zeitkomplexität von $\mathcal{O}(\log(N))$ (vgl. \cite{4}, S.36-39). Der Datentyp ist beispielsweise geeignet für das Speichern von \textit{Timestamps}, \textit{Priority Queues} oder \textit{Leader Boards} (vgl. \cite{4}, S.36-39).
+
+Ein weiterer Datentyp sind \textbf{Hashes}. Dabei werden Key-Value-Paare als Tabelle realisiert, ähnlich zu \textit{Hash-Maps} in \textit{Java} (vgl. \cite{4}, S.36-39). Die Menge an Feldern im Hash ist theoretisch unbegrenzt, der Speicher eines Computers allerdings nicht (vgl. \cite{Redis-Docs-Hash}). Hashes eignen sich, um Objektdaten zu speichern (vgl. \cite{nosql}, S.86) oder Referenzen auf andere Datentyp-Objekte (vgl. \cite{4}, S.36-39).
+
+\ac{Redis} bietet zudem einen Datentyp extra für \ac{JSON}-Objekte. \ac{JSON} ist ein weit verbreitetes, textbasiertes Format für den Austausch von Daten (vgl. \cite{14}, S.6). Dabei werden Key-Value-Paare gespeichert, wobei die Paare ineinander verschachtelt sein können (vgl. \cite{14}, S.8). Beispielsweise kann der Value eines Key-Value-Paares eine Liste an weiteren Key-Value-Paaren beinhalten. Im \ac{Redis}-Datentyp \textbf{JSON} können \ac{JSON}-Objekte mit einer Tiefe von bis zu $128$ gespeichert werden (vgl. \cite{Redis-Docs-JSON}). \ac{Redis} garantiert den schnellen Zugriff auf die Elemente im \ac{JSON}-Objekt, indem die Daten binär in einer Baumstruktur gespeichert werden (vgl. \cite{Redis-Docs-JSON}).
+
+Der Datentyp \textbf{Stream} agiert als Protokolldatei in \ac{Redis}. Elemente können nur angehangen werden, nicht entfernt (vgl. \cite{Redis-Docs-Stream}). Dabei erhält jedes Element eine zeitbasierte ID, wodurch jeder beliebige Zugriff in $\mathcal{O}(1)$ funktioniert (vgl. \cite{Redis-Docs-Stream}).
+
+Mit \textbf{Geospatial} können Nutzer Koordinaten in \ac{Redis} speichern (vgl. \cite{Redis-Docs-Geospatial}). Der Datentyp kann z.B. verwendet werden, um gespeicherte Einträge in der Nähe der eigenen Position zu finden, oder in einem bestimmten Gebiet (vgl. \cite{Redis-Docs-Geospatial}).
+
+Die \textbf{Bitmap} ist streng genommen kein eigener Datentyp (vgl. \cite{Redis-Docs-Bitmap}). Stattdessen umfassen Bitmaps Methoden, um binäre Strings effizient verarbeiten zu können (vgl. \cite{nosql}, S.86). So kann ein Nutzer z.B. Bitmasken speichern und bitweise Operationen auf Binärdaten durchführen (vgl. \cite{Redis-Docs-Bitmap}).
+
+\textbf{Bitfields} sind sinnvoll, um Zahlen in binärer Darstellungsweise zu speichern (vgl. \cite{Redis-Docs-Bitfield}). Bitfields werden auch als Strings gespeichert. Besonders ist, dass Operationen auf Integer-Werten, die im Binärformat gespeichert wurden, möglich sind, z.B. das Inkrementieren (vgl. \cite{Redis-Docs-Bitfield}).
+
+Für das Speichern und Auslesen von Zeitreihen gibt es den Datentyp \textbf{Time Series}. Vorteile sind das Lesen mit geringer Latenz und Aggregationen. Beispielsweise das Finden des Minimums der Zeitreihe, oder die Berechnung des Durchschnitts (vgl. \cite{Redis-Docs-TS}).
+
+Zusätzlich zu den klassischen Datentypen gibt es eine weitere Kategorie, die sogenannten \textbf{Probabilistics}. Das sind Datenstrukturen, die auf der Wahrscheinlichkeitstheorie basieren (vgl. \cite{Redis-Docs-Prob}). 
+
+Ein Beispiel für eine Probabilistische Datenstruktur ist der \textbf{Bloom Filter}. Damit kann effizient überprüft werden, ob ein Element in einem Set vorhanden ist (vgl. \cite{Redis-Docs-Bloom}). Im Bloom Filter werden nicht alle Elemente des Sets gespeichert, sondern nur deren Repräsentation als Hash-Wert (vgl. \cite{Redis-Docs-Bloom}). Bei Hash-Funktionen kann es passieren, dass zwei Urbilder auf denselben Hash-Wert abgebildet werden (vgl. \cite{13}, S.1). Für den Bloom Filter bedeutet dies, dass zwei Elemente dieselbe Hash-Repräsentation ergeben können. Das heißt, dass der Bloom Filter effizient garantieren kann, dass ein Element nicht im Set vorhanden ist. Dann ist allerdings nicht sicher, dass es vorhanden ist (vgl. \cite{Redis-Docs-Bloom}).
+
+
+
+
