@@ -22,16 +22,16 @@
 \contentsline {subsection}{\numberline {2.5.1}Vorteile}{12}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}Nachteile}{12}{subsection.2.5.2}%
 \contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{12}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Antipattern}{12}{subsection.2.5.4}%
-\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{13}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Umsetzung}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{16}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Performance-Test}{16}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{17}{chapter.5}%
-\contentsline {chapter}{\nonumberline Literatur}{18}{chapter*.22}%
-\contentsline {chapter}{Glossar}{21}{section*.23}%
-\contentsline {chapter}{\nonumberline Anhang}{22}{chapter*.25}%
+\contentsline {subsection}{\numberline {2.5.4}Antipattern}{13}{subsection.2.5.4}%
+\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{14}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{14}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{14}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Performance-Test}{17}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{18}{chapter.5}%
+\contentsline {chapter}{\nonumberline Literatur}{19}{chapter*.22}%
+\contentsline {chapter}{Glossar}{22}{section*.23}%
+\contentsline {chapter}{\nonumberline Anhang}{23}{chapter*.25}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
