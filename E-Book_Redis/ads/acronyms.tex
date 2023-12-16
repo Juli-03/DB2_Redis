@@ -11,7 +11,8 @@
 %	siehe auch: http://golatex.de/wiki/%5Cacronym
 %	
 \begin{acronym}[YTMMM]
-\setlength{\itemsep}{-\parsep}
+\setlength{\itemsep}{1.5em} % Vertikaler Abstand zwischen den Acronyms
+\setlength{\parskip}{1em}   % Vertikaler Abstand zwischen Absätzen
 
 \acro{AGPL}{Affero GNU General Public License}
 \acro{WSN}{Wireless Sensor Network}
@@ -25,5 +26,22 @@
 
 \acro{Redis}{Remote Dictionary Server}
 \acro{NoSQL-Datenbank}{Not-only-SQL-Datenbank}
-\acrodefplural{NoSQL-Datenbank}{Not-only-SQL-Datenbanken}
+\acrodefplural{NoSQL-Datenbanken}{Not-only-SQL-Datenbanken}
+
+
+\acro{POSIX}{Portable Operating System Interface}
+\acro{WSL2}{Windows Subsystem for Linux}
+\acro{JSON}{JavaScript Object Notation}
+\acro{OM}{Object-Mapper}
+\acro{ORM}{Object-Relational Mapping}
+\acro{Redis-cli}{Redis command line interface}
+\acro{GUI}{Graphical User Interface}
+\acro{CRUD}{create, read, update, delete}
+
+%\DeclareAcronym{OM}{
+%	short = OM,
+%	long = Object-Mapper,
+%	long-plural-form = Object-...
+%}
+
 \end{acronym}
