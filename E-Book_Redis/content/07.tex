@@ -10,10 +10,12 @@ Bei einem Ausfall der Datenbank kann diese Datei dann wieder schnell eingelesen 
 
 Eine weitere Möglichkeit ist das sogenannte \textit{Append Only File} (AOF) \cite{Redis-Docs-Persistenz}. 
 Dabei handelt es sich um eine Log-Datei, in der alle Änderungen an der Datenbank in Form von Änderungs-Befehlen auf einer Festplatte gespeichert werden.
+
 Da eine solche Log-Datei theoretisch mit jedem weiteren Befehl wachsen würde und so unendlich groß werden könnte, gibt es einen Mechanismus, der dies verhindert.
 Dabei wird in regelmäßigen Abständen ein neuer Ausgangszustand der Datenbank gespeichert, von dem aus eine neue Log-Datei aufgebaut wird. 
 Solange die neue Log-Datei aufgebaut wird, werden alle Befehle dennoch weiterhin in die alte Log-Datei geschrieben, um sicherzustellen, dass bei einem Ausfall während des Aufbaus der neuen Log-Datei keine Daten verloren gehen.
 Sobald die neue Log-Datei fertig aufgebaut ist, wird die alte Log-Datei gelöscht und die neue Log-Datei wird als aktuelle Log-Datei verwendet.
+
 Mit diesem Mechanismus wird garantiert, dass sich die größe einer Log-Datei immer in einem bestimmten Rahmen hält und gleichzeitig die Daten zur jeder Zeit gesichert sind.
 Auch hier gibt es die Möglichkeit, die Häufigkeit der Speicherung festzulegen. Es kann zwischen der Standardmäßigen \textit{Every-Second}-Option, der \textit{Every-Change}-Option und der \textit{No}-Option gewählt werden.
 

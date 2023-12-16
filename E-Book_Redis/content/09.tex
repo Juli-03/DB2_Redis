@@ -3,4 +3,25 @@
 \subsection{Skalierung}
 \label{sec:Skalierung}
 Wie bereits in \autoref{sec:Client-Server} angesprochen, bietet Redis die Möglichkeit mehrere Server zu verwenden.
-Diese Art von Erweiterung, bei der zusätzliche Knoten hinzugefügt werden, wird auch als horizontale Skalierung bezeichnet \cite{Fasel2016}.
+Diese Server sind mit Hilfe einer \textit{Master-Slave}-Architektur miteinander verbunden.
+
+Der Master-Server verwaltet weiterhin die gesammte Datenbank und empfängt Schreibanfragen der Clients.
+Wenn Änderungen in der Datenbank erfolgen, werden diese Änderungen an die Slave-Server weitergegeben.
+Das bietet den Vorteil, dass im Falle eines Ausfalls des Master-Knotens die Daten zum Einen nicht verloren gehen und zum Anderen schnell wieder zur Verfügung stehen.
+Außerdem können die Slave-Knoten auch für Leseanfragen, wodurch die Last bei hohen Zugriffszahlen auf mehrere Server verteilt werden kann \cite[141]{Huang2018}.
+
+Sollte einer der Slave-Knoten vorrübergehend ausfallen bzw. nicht erreichbar sein und deshalb keine Änderungen empfangen können, findet eine automatische Synchronisation statt, sobald der Slave-Knoten wieder erreichbar ist.
+Der Server erkennt anhand der fehlenden Antwort des Slaves, dass dieser nicht erreichbar ist und speichert die Änderungen in einer Warteschlange, dem sogenannten \textit{Backlog-Buffer}. 
+Dieser Backlog-Buffer hat eine feste Größe, die bei der Konfiguration des Servers festgelegt werden kann. 
+
+Übersteigt die Größe der Änderungen während der Abwesenheit des Slaves die des Buffers, findet ein sogenannter \textit{Full-Resync} statt.
+Das bedeutet, dass der Slave-Knoten mit einem aktuellen Snapshot der Daten aus dem Master neu initialisiert wird \cite{Redis-Docs-Management-Replication}.
+Andernfalls findet ein sogenannter \textit{Partial-Resync} statt. Dabei werden die Änderungen des Backlog-Buffers an den Slave-Knoten übertragen und dort ausgeführt \cite[146 - 153]{Huang2018}.
+
+Die Größe des Backlog-Buffers sollte anhand des erwarteten Datenaufkommens festgelegt werden. 
+Bei größeren Datenmengen sollte der Buffer größer gewählt werden, damit nicht schon bei kurzen Ausfallzeiten der Buffer überläuft und anschließend ein gesammter Snapshot übertragen werden muss.
+Trotzdem sollte der Buffer nicht zu groß gewählt werden, da die Synchronisation mittels Full-Resync bei großen Datenmengen performanter sein kann, als die Übertragung der Änderungen mittels Partial-Resync.
+
+
+
+
