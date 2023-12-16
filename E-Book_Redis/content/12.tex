@@ -1,3 +1,13 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Redis-Tools}
+
+Der einfachste Weg, um mit einem \ac{Redis}-Server zu kommunizieren ist das \ac{Redis-cli}. \ac{Redis-cli} ist ein Programm, das im Terminal genutzt werden kann. Damit können Befehle an einen \ac{Redis}-Server gesendet und Antworten im Terminal ausgegeben werden (vgl. \cite{Redis-Docs-cli}). So können Nutzer z.B. neue Key-Value Paare zur Datenbank hinzufügen, oder bestehende manipulieren.
+
+Eine weitere Methode ist \textit{Lua-Scripting}. \textit{Lua} ist eine leichtgewichtige Skriptsprache mit lediglich $21$ Schlüsselwörtern, wie z.B. \glqq \textit{if then}\grqq (vgl. \cite{17}, S.7). Der Interpreter und die Virtuelle Maschine für \textit{Lua} wurden in \textit{C} geschrieben (vgl. \cite{17}, S.7). In einem \textit{Lua}-Skript können mehrere \ac{Redis}-Befehle zusammengefasst werden. Der Nutzer kann ein solches Skript dann über das \ac{Redis-cli} ausführen (vgl. \cite{Redis-Docs-cli}). Die Vorteile sind das Bündeln mehrerer Befehle, die Strukturierung mit Bedingungen und die Möglichkeit das Skript in einem Text-Editor schreiben zu können.
+
+Für \ac{Redis} gibt es auch ein \ac{GUI} namens \gls{ri}. Das Programm kann unter diesem \href{https://redis.com/redis-enterprise/redis-insight/?_gl=1*128mfio*_ga*OTc4MjQ4NDk1LjE3MDI2NjI1MzY.*_ga_8BKGRQKRPV*MTcwMjcxMzU2Ny4zLjEuMTcwMjcyMTEyNS42MC4wLjA.*_gcl_au*MTYxMzA5MjQ2MS4xNzAyNjYyNTM2&_ga=2.55945451.1702553176.1702662536-978248495.1702662536}{Link} heruntergeladen werden. \gls{ri} ist ein Werkzeug, um Daten in \ac{Redis} zu visualisieren und zu manipulieren (vgl. \cite{Redis-Docs-RI}). Die Manipulation funktioniert über eine \ac{GUI} oder \ac{Redis-cli}-Befehle in der Applikation (vgl. \cite{Redis-Docs-RI}). 
+
+Nutzer können \ac{Redis}-Instanzen verwalten, die auf dem eigenen Computer laufen, oder Instanzen von externen Hosts. Eine Instanz kann auch ein \ac{Redis}-Cluster oder \ac{Redis}-Sentinel sein (vgl. \cite{Redis-Docs-RI}).
+
+\gls{ri} ermöglicht \ac{CRUD} Operationen für Listen, Hashes, Strings, Sets, Sorted Sets und JSON Objekte (siehe \autoref{subsec:datentypen}). Mit dem integrierten \textit{Profiler} können Nutzer in Echtzeit überwachen, welche Befehle an den \ac{Redis}-Server gesendet werden (vgl. \cite{Redis-Docs-RI}). Mit weiteren Datenbank-Analyse-Werkzeugen kann sich der Anwender z.B. die Verteilung der verwendeten Datentypen oder den Speicherverbrauch der \ac{Redis}-Instanz visualisieren lassen (vgl. \cite{Redis-Docs-RI}).
