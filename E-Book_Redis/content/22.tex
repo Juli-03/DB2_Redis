@@ -1,3 +1,17 @@
 %!TEX root = ../dokumentation.tex
 
 \section{Idee der beispielhaften Anwendung}
+
+Die Implementierung soll die Vorteile von \ac{Redis} zeigen und einem möglichst plausiblen Anwendungsfall der \ac{NoSQL-Datenbank} entsprechen. Hierbei ist besonders wichtig, dass \ac{Redis} in der Breite demonstriert wird. Das bedeutet, dass möglichst viele Bereiche abgedeckt werden und sich nicht nur auf eine spezifische Funktion von \ac{Redis} konzentriert wird.
+
+Die beispielhafte \ac{Redis}-Anwendung ist eine Chat-Applikation, mit der Freunde untereinander Nachrichten austauschen können. Ein Nutzer soll sich über eine \ac{GUI} einloggen und Chats mit unterschiedlichen Freunden auswählen können. Neue Nachrichten in den Chats sollen schnell und automatisch ankommen. 
+
+Mit der Chat-App soll unter anderem die Geschwindigkeit von \ac{Redis} demonstriert werden. So erwarten Nutzer eine möglichst geringe Latenz-Zeit zwischen Absenden und Empfangen einer Nachricht. 
+
+Ebenfalls soll das Publisher und Subscriber Prinzip demonstriert werden (siehe \autoref{subsec:pubsub}). Neue Nachrichten im Chat sollen automatisch angezeigt werden, ohne dass der Nutzer die Anwendung aktualisieren muss.
+
+Zudem fallen bei einer Chat-App unterschiedliche Daten an. Das ermöglicht es die unterschiedlichen Datentypen, die \ac{Redis} bietet, auszuprobieren und zu demonstrieren. Beispielsweise sollen Nachrichten in zeitlicher Abfolge sortiert sein, Nutzerdaten gespeichert und schnell abgerufen werden können und Bilder für die Profile einzelner Nutzer gespeichert werden.
+
+\newpage
+
+Die Idee einer Chat-App eignet sich ebenfalls für eine Live-Demonstration der Anwendung. So kann ein Rechner den \ac{Redis}-Server hosten während sich andere Computer als Client bei diesem Server anmelden. Jeder Rechner kann dann einen individuellen Nutzer erstellen und gemeinsam können Nachrichten ausgetauscht werden. Dabei wird die Schnelligkeit von \ac{Redis} demonstriert, da Nachrichten, die von einem Rechner abgesendet werden, sofort auf einem anderen Computer angezeigt werden sollen.
