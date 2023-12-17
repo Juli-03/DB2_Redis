@@ -1,38 +1,39 @@
 \babel@toc {ngerman}{}\relax 
-\contentsline {chapter}{\nonumberline Abkürzungsverzeichnis}{V}{chapter*.4}%
-\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{VI}{chapter*.5}%
-\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.6}%
-\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.7}%
+\contentsline {chapter}{\nonumberline Abkürzungsverzeichnis}{VI}{chapter*.4}%
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{VII}{chapter*.5}%
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VIII}{chapter*.6}%
+\contentsline {chapter}{\nonumberline Listings}{IX}{chapter*.7}%
 \contentsline {chapter}{\numberline {1}Einführung}{1}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Literatur-Review}{2}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Geschichte}{2}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Architektur}{2}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Architektur}{3}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Key-Value Datenbank}{3}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}In Memory}{4}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Persistenz}{4}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Client-Server}{5}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.3}Persistenz}{5}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Client-Server}{6}{subsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.2.5}Skalierung}{6}{subsection.2.2.5}%
-\contentsline {section}{\numberline {2.3}Methoden und Funktionsweise}{6}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Installation und Betriebssysteme}{6}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Redis-Tools}{8}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Datentypen}{8}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Publisher und Subscriber}{8}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Bezug zum CAP-Theorem}{9}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Redis-Cluster}{10}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Redis-Sentinel}{11}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Bewertung}{12}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Vorteile}{12}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Nachteile}{12}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{12}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Antipattern}{12}{subsection.2.5.4}%
-\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{13}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Umsetzung}{15}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{15}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{15}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Performance-Test}{15}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{16}{chapter.5}%
-\contentsline {chapter}{Glossar}{17}{section*.17}%
-\contentsline {chapter}{\nonumberline Anhang}{18}{chapter*.19}%
+\contentsline {section}{\numberline {2.3}Methoden und Funktionsweise}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Installation und Betriebssysteme}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Redis-Tools}{10}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Datentypen}{11}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Publisher und Subscriber}{13}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Bezug zum CAP-Theorem}{14}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Redis-Cluster}{14}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Redis-Sentinel}{15}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Bewertung}{16}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Vorteile}{16}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Nachteile}{17}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Anwendungsfelder}{17}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Antipattern}{18}{subsection.2.5.4}%
+\contentsline {chapter}{\numberline {3}Geplantes Vorgehen}{20}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Idee der beispielhaften Anwendung}{20}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Architektur der Anwendung}{21}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Verwendete Technologien und Setup}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Funktionalitäten für den Nutzer}{24}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Performance-Test}{24}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Kritische Reflexion und Ausblick}{26}{chapter.5}%
+\contentsline {chapter}{\nonumberline Literatur}{27}{chapter*.24}%
+\contentsline {chapter}{Glossar}{31}{section*.25}%
+\contentsline {chapter}{\nonumberline Anhang}{32}{chapter*.27}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

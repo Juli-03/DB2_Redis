@@ -3,12 +3,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Client-Server-Modell, \blx@tocontentsinit {0}\cite [23]{Bengel2014}\relax }}{5}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Client-Server-Modell, \blx@tocontentsinit {0}\cite [23]{Bengel2014}\relax }}{6}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Redis-Cluster mit drei Master-Servern, \blx@tocontentsinit {0}\cite {aeraki}\relax }}{7}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architektur der Chat-App\relax }}{13}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Datenmodellierung in \acs {Redis}\relax }}{14}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architektur der Chat-App\relax }}{21}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Datenmodellierung in \acs {Redis}\relax }}{22}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Visualisierung des Datenmodells\relax }}{23}{figure.caption.22}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {.1}{\ignorespaces Benchmark-Test von Redis\relax }}{18}{figure.caption.20}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {.1}{\ignorespaces Benchmark-Test von Redis\relax }}{32}{figure.caption.28}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -1,8 +1,9 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Installation und Betriebssysteme}
+\label{subsection:installation}
 
-\acs{Redis} ist in \textit{ANSI C} geschrieben und funktioniert somit auf den meisten \acs{POSIX} Systemen, wie z.B. \textit{Linux} oder \textit{macOS} (vgl. \cite{Redis-Docs-Intro}). \acs{POSIX} steht für \textit{Portable Operating System Interface} und umfasst eine Menge an Standards für \textit{UNIX}-Derivate (vgl. \cite{15}, S.8). In der offiziellen \ac{Redis}-Dokumentation heißt es: \glqq \textit{we recommend using Linux for deployment}\grqq (\cite{Redis-Docs-Intro}), die Entwickler empfehlen also \textit{Linux}, statt \textit{macOS}.
+\acs{Redis} ist in \textit{ANSI C} geschrieben und funktioniert somit auf den meisten \acs{POSIX} Systemen, wie z.B. \textit{Linux} oder \textit{macOS} (vgl. \cite{Redis-Docs-Intro}). \ac{POSIX} umfasst eine Menge an Standards für \textit{UNIX}-Derivate (vgl. \cite{15}, S.8). In der offiziellen \ac{Redis}-Dokumentation heißt es: \glqq \textit{we recommend using Linux for deployment}\grqq (\cite{Redis-Docs-Intro}), die Entwickler empfehlen also \textit{Linux}, statt \textit{macOS}.
 
 Es gibt keine offizielle Unterstützung für \textit{Windows} (vgl. \cite{Redis-Docs-Intro}). Allerdings ist es möglich, \ac{WSL2} auf \textit{Windows} zu installieren. Damit können \textit{Linux}-Binärdateien auf \textit{Windows} ausgeführt werden (vgl. \cite{Redis-Docs-Install-W}). Alternativ kann auch \textit{Ubuntu} auf \textit{Windows} virtualisiert werden. Es existieren unoffizielle \ac{Redis}-Versionen für \textit{Windows}, die allerdings nicht der Produktionsqualität entsprechen, von Versionen für \textit{Linux} oder \textit{macOS} (vgl. \cite{4}, S.16). 
 
@@ -15,7 +16,7 @@ Für die Installation gibt es zwei Möglichkeiten. Entweder man installiert nur 
 	\item \textit{Bloom Filter}
 \end{itemize}
 
-\ac{JSON}, \textit{Time Series} und \textit{Bloom Filter} sind \ac{Redis}-spezifische Datentypen, die in Kapitel TODO erklärt werden. \textit{Search and Query} ist eine Reihe an Möglichkeiten, um einfache und effiziente Abfragen an den \ac{Redis}-Server zu stellen (vgl. \cite{Redis-Docs-Search-Query}). Beispielsweise ist mit \textit{Search and Query} eine simple Indexierung von \ac{JSON}-Objekten möglich (vgl. \cite{Redis-Docs-Search-Query}). Ebenfalls kann der Nutzer damit Aggregationen durchführen, wie z.B. das Gruppieren oder Sortieren von Abfrageergebnissen (vgl. \cite{Redis-Docs-Aggregation}).  
+\ac{JSON}, \textit{Time Series} und \textit{Bloom Filter} sind \ac{Redis}-spezifische Datentypen, die in \autoref{subsec:datentypen} erklärt werden. \textit{Search and Query} ist eine Reihe an Möglichkeiten, um einfache und effiziente Abfragen an den \ac{Redis}-Server zu stellen (vgl. \cite{Redis-Docs-Search-Query}). Beispielsweise ist mit \textit{Search and Query} eine simple Indexierung von \ac{JSON}-Objekten möglich (vgl. \cite{Redis-Docs-Search-Query}). Ebenfalls kann der Nutzer damit Aggregationen durchführen, wie z.B. das Gruppieren oder Sortieren von Abfrageergebnissen (vgl. \cite{Redis-Docs-Aggregation}).  
 
 Unter \textit{Linux} lassen sich \ac{Redis} oder der \ac{Redis}-Stack über einen der folgenden Terminal- befehle installieren:
 
@@ -52,7 +53,7 @@ Dabei stoppt der \ac{Redis}-Server erst alle Clients, sorgt dann für Persistenz
 	\item Redis OM Spring
 \end{itemize}
 
-\ac{OM} übernehmen in \ac{Redis} das \ac{ORM}. \ac{ORM} ist eine Menge an Techniken, um inkompatible Systeme eines Computers miteinander zu verbinden (vgl. \cite{16}, S.1).
+\ac{OM} übernehmen in \ac{Redis} das \ac{ORM}. \ac{ORM} ist eine Menge an Techniken, um inkompatible Systeme eines Computers miteinander zu verbinden, z.B. \ac{Redis} und \textit{Python} (vgl. \cite{16}, S.1).
 
 
 
