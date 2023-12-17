@@ -1,3 +1,17 @@
 %!TEX root = ../dokumentation.tex
 
 \section{Verwendete Technologien und Setup}
+Im folgenden Abschnitt soll die Umsetztung der Chat-App genauer erläutert werden.
+Die Umsetzung hängt stark von den verwendeten Technologien ab, welche im Nachfogenden genau benannt werden.
+
+Wie bereits in der Architektur der Anwendung genannt, besteht die Anwendung aus zwei Hauptkomponenten: dem Backend und dem Frontend (vgl. Abbildung \ref{fig:arch}).
+Als Programmiersprache um die Klassen des Backends zu implementieren, wurde die multiparadimatische Programmiersprache Python gewählt.
+Python unterstützt objektorientierte Programmierung und ermöglicht es alle Klassen des Models zu modelieren. 
+Zusätzlich bietet Python die Möglichkeit verschiedenste Biblioteken einzubinden.
+Nennswert sind die Bibliotheken \textit{redis und flask}, welche die Grundfunktionalitäten der Anwendung bestimmen. 
+Die \textit{redis} Bibliothek ermöglicht die Einbindung einer \acs{Redis}-Datenbank, welche Teil des Backends ist.
+
+Das Frontend der Applikation wird durch \textit{flask} realisiert. Hierbei handelt es sich um ein Webframework.
+Flask ermöglicht es, in Verbindung mit HTLM, eine bidirektionale Verbindung zwischen dem Backend und dem Frontend zu realisierten.
+Die HTML-Templates erzeugen die Graphischebenutzeroberfläche, welche vom User bedient wird. Die Kommunikation ins Backend über kann über \textit{POST und GET} Befehle ausgeführt werden, aber auch durch die Implementierung eines Websockets.
+
