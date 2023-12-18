@@ -25,15 +25,14 @@ Die Nachricht aus dem Beispiel wird nur von den Clients verarbeitet, die den Kan
 Subscriber sind in ihrer Anzahl an Kanälen nicht limitiert. In \acs{Redis} besteht sogar die Möglichkeit eine sogenannte \textit{pattern matching subscribtion} abzuschließen. Diese Art der Subscribtion erlaubt des einem \textit{Redis-Client} alle Kanäle zu empfangen, die ein bestimmtes Namensmuster haben. Besipielsweise können mit \textit{PSUBSCRIBE news.*} alle Nachrichten empfangen werden, die in den Kanälen mit dem Präfix \textit{news} veröffentlicht werden.
 
 
-NEW CHAPTER Security
-\\
+\subsection{Security}
 \acs{Redis} wurde mit dem Gedanken konzipiert, dass nur zugelassenen Clients in einer vertrauten Umgebung  Zugriff auf \acs{Redis}-Instanzen gewährt wird. 
 Im Allgemeinen ist es nicht ratsam, \acs{Redis}in einer Umgebung einzusetzen, in der direkte Zugriffe über das Internet erfolgen und unvertrauenswürdige Clients Zugriff auf den \acs{Redis} TCP-Port haben könnten (vgl. \cite{Redis-Security}).
 
 In Situationen, in denen Caching für Webseiten erforderlich ist und potenziell unvertrauenswürdige Clients die Anwendung nutzen, sollte der Zugriff auf Redis nicht direkt vom Client erfolgen. Stattdessen wird dies über die Anwendung selbst ausgeführt, die als Vermittler dient.
-Hierbei können NEUES Access Control Lists (ACLs) eingesetzt werden, um Benutzereingaben zu validieren und zu entscheiden, welche Aktionen erlaubt sind. Die Authentifizierung der Clients erfolgt hierbei auch über die ACL.
-Die ACL können durch Verwendung von Passwörtern als zusätzliche Schutzmaßnahme verwendet werden, falls Firewalls oder andere Sicherheitsmaßnahmen nicht ausreichen. Der Client muss das Passwort kennen, um Zugriff zu erhalten (vgl. \cite{Redis-Security}).
+Hierbei können \acp{ACL} eingesetzt werden, um Benutzereingaben zu validieren und zu entscheiden, welche Aktionen erlaubt sind. Die Authentifizierung der Clients erfolgt hierbei auch über die \acs{ACL}.
+Die \acs{ACL} können durch Verwendung von Passwörtern als zusätzliche Schutzmaßnahme verwendet werden, falls Firewalls oder andere Sicherheitsmaßnahmen nicht ausreichen. Der Client muss das Passwort kennen, um Zugriff zu erhalten (vgl. \cite{Redis-Security}).
 
-Obwohl TLS von Redis unterstützt wird, ist es optional. Es kann auf den Kommunikationskanälen zwischen Nodes, Clients, Replikas und auch auf dem Redis Cluster Bus Protokoll implementiert werden (vgl. \cite{Redis-Security}).
+Obwohl \ac{TLS} von \ac{Redis} unterstützt wird, ist es optional. Es kann auf den Kommunikationskanälen zwischen Nodes, Clients, Replikas und auch auf dem \acs{Redis} Cluster Bus Protokoll implementiert werden (vgl. \cite{Redis-Security}).
 
-Eine zusätzliche Sicherheitsmaßnahme besteht darin, Befehle unbrauchbar zu machen, indem man sie umbenennt. Zum Beispiel könnte der Konfigurationsbefehl, wie \textit{CONFIG} in einen Hex-Code umbenannt werden. Dies trägt dazu bei, potenzielle Sicherheitslücken zu minimieren und eine sicherere Redis-Umgebung zu schaffen (vgl. \cite{Redis-Security}).
+Eine zusätzliche Sicherheitsmaßnahme besteht darin, Befehle unbrauchbar zu machen, indem man sie umbenennt. Zum Beispiel könnte der Konfigurationsbefehl, wie \textit{CONFIG} in einen Hex-Code umbenannt werden. Dies trägt dazu bei, potenzielle Sicherheitslücken zu minimieren und eine sicherere \acs{Redis}-Umgebung zu schaffen (vgl. \cite{Redis-Security}).
