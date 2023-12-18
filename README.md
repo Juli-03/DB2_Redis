@@ -15,4 +15,4 @@ _für Installations-Anweisungen: siehe README im Ordner Implementierung!_
 
 ---
 
-Demonstration der Implementierung unter folgendem [Link](https://youtu.be/VUJK2ILXU5g)
+Demonstration der Implementierung mit zwei Nutzern unter folgendem [Link](https://youtu.be/VUJK2ILXU5g)
