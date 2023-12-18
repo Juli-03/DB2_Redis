@@ -12,3 +12,7 @@ Repo für das E-Book über Redis und eine beispielhafte Implementierung
 ---
 
 _für Installations-Anweisungen: siehe README im Ordner Implementierung!_
+
+---
+
+Demonstration der Implementierung unter folgendem [Link](https://youtu.be/VUJK2ILXU5g)
