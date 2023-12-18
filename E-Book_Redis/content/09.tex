@@ -10,7 +10,7 @@ Wenn Änderungen in der Datenbank erfolgen, werden diese Änderungen an die Slav
 Das bietet den Vorteil, dass im Falle eines Ausfalls des Master-Knotens die Daten zum Einen nicht verloren gehen und zum Anderen schnell wieder zur Verfügung stehen.
 Außerdem können die Slave-Knoten auch für Leseanfragen, wodurch die Last bei hohen Zugriffszahlen auf mehrere Server verteilt werden kann \cite[141]{3}.
 
-Sollte einer der Slave-Knoten vorrübergehend ausfallen bzw. nicht erreichbar sein und deshalb keine Änderungen empfangen können, findet eine automatische Synchronisation statt, sobald der Slave-Knoten wieder erreichbar ist.
+Sollte einer der Slave-Knoten vorrübergehend ausfallen, bzw. nicht erreichbar sein und deshalb keine Änderungen empfangen können, findet eine automatische Synchronisation statt, sobald der Slave-Knoten wieder erreichbar ist.
 Der Server erkennt anhand der fehlenden Antwort des Slaves, dass dieser nicht erreichbar ist und speichert die Änderungen in einer Warteschlange, dem sogenannten \textit{Backlog-Buffer}. 
 Dieser Backlog-Buffer hat eine feste Größe, die bei der Konfiguration des Servers festgelegt werden kann. 
 
