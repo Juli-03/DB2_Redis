@@ -3,7 +3,7 @@
 \subsection{Redis-Tools}
 \label{subsec:tools}
 
-Der einfachste Weg, um mit einem \ac{Redis}-Server zu kommunizieren ist das \ac{Redis-cli}. \ac{Redis-cli} ist ein Programm, das im Terminal genutzt werden kann. Damit können Befehle an einen \ac{Redis}-Server gesendet und Antworten im Terminal ausgegeben werden (vgl. \cite{Redis-Docs-cli}). So können Nutzer z.B. neue Key-Value Paare zur Datenbank hinzufügen, oder bestehende manipulieren.
+Der einfachste Weg, um mit einem \ac{Redis}-Server zu kommunizieren ist das \ac{Redis-cli}. \ac{Redis-cli} ist ein Programm, das im Terminal genutzt werden kann. Damit können Befehle an einen \ac{Redis}-Server gesendet und Antworten im Terminal ausgegeben werden (vgl. \cite{Redis-Docs-cli}). So können Nutzer z.B. neue Key-Value Paare zur Datenbank hinzufügen oder bestehende manipulieren.
 
 Eine weitere Methode ist \textit{Lua-Scripting}. \textit{Lua} ist eine leichtgewichtige Skriptsprache mit lediglich $21$ Schlüsselwörtern, wie z.B. \glqq \textit{if then}\grqq (vgl. \cite{17}, S.7). Der Interpreter und die Virtuelle Maschine für \textit{Lua} wurden in \textit{C} geschrieben (vgl. \cite{17}, S.7). In einem \textit{Lua}-Skript können mehrere \ac{Redis}-Befehle zusammengefasst werden. Der Nutzer kann ein solches Skript dann über das \ac{Redis-cli} ausführen (vgl. \cite{Redis-Docs-cli}). Die Vorteile sind das Bündeln mehrerer Befehle, die Strukturierung mit Bedingungen und die Möglichkeit das Skript in einem Text-Editor schreiben zu können.
 

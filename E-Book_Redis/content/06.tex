@@ -3,20 +3,20 @@
 \subsection{In Memory}
 \label{subsec:inMemory}
 
-Redis zählt zu den sogenannten In-Memory-Datenbanken oder kurz \acs{IMDB}. 
-Das bedeutet, dass alle Daten zur Laufzeit im Arbeitsspeicher (RAM) des Servers liegen.
-Dieses Vorgehen verhilft Redis zu seinem größten Vorteil: der Geschwindigkeit.
+Redis zählt zu den sogenannten \ac{IMDB}. 
+Das bedeutet, dass alle Daten zur Laufzeit im \ac{RAM} des Servers liegen.
+Dieses Vorgehen verhilft \acs{Redis} zu seinem größten Vorteil: der Geschwindigkeit.
 
-Denn im Vergleich zu anderen Datenbanksystemen, deren Datenspeicherung üblicherweise auf Festplatten stattfindet, ist das Lesen und Schreiben von Daten in den RAM um ein vielfaches schneller \cite{VL_Rechnerarchitektur}.
-Dadurch ist Redis in der Lage eine sehr hohe Anzahl an Operationen pro Sekunde zu verarbeiten.
+Denn im Vergleich zu anderen Datenbanksystemen, deren Datenspeicherung üblicherweise auf Festplatten stattfindet, ist das Lesen und Schreiben von Daten in den \acs{RAM} um ein vielfaches schneller \cite{VL_Rechnerarchitektur}.
+Dadurch ist \acs{Redis} in der Lage, eine sehr hohe Anzahl an Operationen pro Sekunde zu verarbeiten.
 Genaueres über die Performance wird später in \autoref{sec:Performance} erläutert.
 
 Der Vorteil der Geschwindigkeit, den man sich durch die Verwendung einer \acs{IMDB} verschafft, ist jedoch mit zwei großen Nachteilen gekoppelt.
 Der erste Nachteil ist rein monitärer Natur. 
-Denn RAM ist im Vergleich zu Festplattenspeicher sehr teuer. Für das gleiche Geld bekommt man nur einen Bruchteil an Speicherplatz.
+Denn \acs{RAM} ist im Vergleich zu Festplattenspeicher sehr teuer. Für das gleiche Geld bekommt man nur einen Bruchteil an Speicherplatz.
 Außerdem ist die maximale Größe des Arbeitsspeichers in einem Server aufgrund von technischen Einschränkungen begrenzt.
 
-Der zweite Nachteil bezieht sich auf die Speichereigenschaften des RAMs.
+Der zweite Nachteil bezieht sich auf die Speichereigenschaften des \acs{RAM}s.
 Dieser ist nämlich im Gegensatz zu Festplattenspeichern nicht persistent.
-Das bedeutet, dass die Daten im RAM nur solange erhalten bleiben, wie dieser mit Strom versorgt wird.
-Fällt die Stromversorgung aus, gehen also alle Daten aus dem RAM verloren. 
+Das bedeutet, dass die Daten im \acs{RAM} nur solange erhalten bleiben, wie dieser mit Strom versorgt wird.
+Fällt die Stromversorgung aus, gehen also alle Daten aus dem \acs{RAM} verloren. 
