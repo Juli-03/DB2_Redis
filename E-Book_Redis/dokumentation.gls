@@ -3,7 +3,7 @@
 \glsgroupheading{glsnumbers}\relax \glsresetentrylist %
 \glossentry{acid}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{17}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{18}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{26}}}%
 \glossentry{kvDB}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}}}%
@@ -11,7 +11,7 @@
 		\setentrycounter[]{page}\glsnumberformat{4}}}%
 \glossentry{ri}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{10}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{17}}}%
+		\setentrycounter[]{page}\glsnumberformat{18}}}%
 \glossentry{whitelist}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{19}}}%
 \end{theglossary}\glossarypostamble
