@@ -18,8 +18,9 @@ setup a VM on your Windows with Ubuntu running and follow the steps described ab
 
 ## Get the website running
 
-1. install the necessary packages using our requirements.txt
-2. run the python file chatApp.py
+1. Make sure your Redis-server is running and your config.py corresponds with the server
+2. install the necessary packages using our requirements.txt
+3. run the python file chatApp.py
 
      _voila_
 
