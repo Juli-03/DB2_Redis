@@ -2,14 +2,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Client-Server-Modell, \blx@tocontentsinit {0}\cite [23]{Bengel2014}\relax }}{6}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Redis-Cluster mit drei Master-Servern, \blx@tocontentsinit {0}\cite {aeraki}\relax }}{7}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces \textit {Client-Server-Modell} (vgl. \blx@tocontentsinit {0}\cite {Bengel2014}, S.23)\relax }}{6}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Redis-Cluster mit drei Master-Servern (vgl.\blx@tocontentsinit {0}\cite {aeraki})\relax }}{8}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Wire-Protocol Beispiel (vgl. \blx@tocontentsinit {0}\cite {Redis-PubSub})\relax }}{15}{figure.caption.22}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architektur der Chat-App\relax }}{21}{figure.caption.22}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Datenmodellierung in \acs {Redis}\relax }}{22}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Visualisierung des Datenmodells\relax }}{23}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architektur der Chat-App\relax }}{22}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Datenmodellierung in \acs {Redis}\relax }}{23}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Visualisierung des Datenmodells\relax }}{24}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Beispielhafter Ablauf einer gesendeten Nachricht\relax }}{25}{figure.caption.30}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Benchmark-Test\relax }}{27}{figure.caption.32}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Benchmark-Test\relax }}{28}{figure.caption.29}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

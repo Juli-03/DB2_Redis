@@ -1,14 +1,17 @@
-\glossaryentry{000001?\glossentry{acid}|setentrycounter[]{page}"\glsnumberformat}{3}
+\glossaryentry{000001?\glossentry{Transport Layer Security}|setentrycounter[]{page}"\glsnumberformat}{IV}
+\glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{1}
+\glossaryentry{000003?\glossentry{acid}|setentrycounter[]{page}"\glsnumberformat}{3}
 \glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{3}
-\glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{3}
-\glossaryentry{000003?\glossentry{hash}|setentrycounter[]{page}"\glsnumberformat}{4}
+\glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{4}
+\glossaryentry{000004?\glossentry{hash}|setentrycounter[]{page}"\glsnumberformat}{4}
 \glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{4}
 \glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{4}
 \glossaryentry{000002?\glossentry{kvDB}|setentrycounter[]{page}"\glsnumberformat}{4}
-\glossaryentry{000004?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{10}
-\glossaryentry{000004?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{10}
-\glossaryentry{000004?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{10}
-\glossaryentry{000004?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{18}
-\glossaryentry{000001?\glossentry{acid}|setentrycounter[]{page}"\glsnumberformat}{18}
-\glossaryentry{000005?\glossentry{whitelist}|setentrycounter[]{page}"\glsnumberformat}{19}
-\glossaryentry{000001?\glossentry{acid}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{000005?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{000005?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{000005?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{000001?\glossentry{Transport Layer Security}|setentrycounter[]{page}"\glsnumberformat}{16}
+\glossaryentry{000005?\glossentry{ri}|setentrycounter[]{page}"\glsnumberformat}{19}
+\glossaryentry{000003?\glossentry{acid}|setentrycounter[]{page}"\glsnumberformat}{19}
+\glossaryentry{000006?\glossentry{whitelist}|setentrycounter[]{page}"\glsnumberformat}{20}
+\glossaryentry{000003?\glossentry{acid}|setentrycounter[]{page}"\glsnumberformat}{28}
