@@ -26,3 +26,7 @@ setup a VM on your Windows with Ubuntu running and follow the steps described ab
 ## Analyse your Redis DB
 
 Use [RedisInsight](https://redis.io/docs/connect/insight/) to take a look at what is saved in the database when playing with the Web-App!
+
+---
+
+Demo of the Implementation with two users: [YouTube](https://youtu.be/VUJK2ILXU5g)
