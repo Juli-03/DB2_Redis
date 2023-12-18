@@ -1,3 +1,5 @@
+# This is a demo chat web app, whose sole purpose is to demonstrate the capabilities of Redis.
+
 # Setup
 
 ---
