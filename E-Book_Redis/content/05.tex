@@ -1,7 +1,7 @@
 %!TEX root = ../dokumentation.tex
 
 \subsection{Key-Value Datenbank}
-Wie bereits erläutert handelt es sich bei \acs{Redis} um eine \acs{NoSQL-Datenbank} (vgl. Abschnitt \ref{Geschichte}). Aus diesem Grund erfüllt sie die obligatorischen Eigenschaft einer solchen Datenbank. Diese sind: 
+Wie bereits erläutert handelt es sich bei \acs{Redis} um eine \acs{NoSQL}-Datenbank (vgl. Abschnitt \ref{Geschichte}). Aus diesem Grund erfüllt sie die obligatorischen Eigenschaft einer solchen Datenbank. Diese sind (vgl. \cite{1}, S.222): 
 \begin{itemize}
 	\item Kein relationales Schema
 	\item Ausrichtung auf verteilte und horizontale Skalierbarkeit 
@@ -10,15 +10,16 @@ Wie bereits erläutert handelt es sich bei \acs{Redis} um eine \acs{NoSQL-Datenb
 	\item Einfacher Zugriff über eine Programmierschnittstelle
 	\item Anderes Konsistenzmodell als \gls{acid}
 \end{itemize}
-(vgl. \cite{1}, S.222). Bei \acp{NoSQL-Datenbank} wird zwischen verschiedenen Modellen unterschieden. \acs{Redis} zählt zu den \glspl{kvDB}. Diese Ausprägung der \acs{NoSQL-Datenbank} soll im folgenden analysiert werden. 
-
-Die einfachste Herangehensweise, um Daten zu speichern, ist die Zuweisung eines Wertes zu einem Schlüssel (vgl. \cite{1}, S.223). Diese Eigenschaft nutzt eine \gls{kvDB}. Sie ist definiert als eine Datenbank, die:
+Bei \acs{NoSQL}-Datenbanken wird zwischen verschiedenen Modellen unterschieden. \acs{Redis} zählt zu den \glspl{kvDB}. Diese Ausprägung der \acs{NoSQL}-Datenbank soll im folgenden analysiert werden. 
+\newpage
+Die einfachste Herangehensweise, um Daten zu speichern, ist die Zuweisung eines Wertes zu einem Schlüssel (vgl. \cite{1}, S.223). Diese Eigenschaft nutzt eine \gls{kvDB}. Sie ist definiert als eine Datenbank, die (vgl. \cite{1}, S.224):
 \begin{itemize}
 	\item  eine Menge von identifizierenden Datenobjekten (Schlüsseln) besitzt,
 	\item  zu jedem Schlüssel genau ein assoziiertes deskriptives Datenobjekt, welches den Wert zum zugehörigen Schlüssel darstellt, besitzt
 	\item und mit der Angabe des Schlüssels der zugehörige Wert aus der Datenbank abgefragt werden kann
 \end{itemize}
-(vgl. \cite{1}, S.224). Bei der Speicherung von Daten wird aus dem Schlüssel ein \gls{hash} berechnet. Mithilfe von diesem wird entschieden auf welchem Shard der Schlüssel gespeichert wird (vgl. Abschnitt \ref{sec:Skalierung}).
-\\Diese Vorgehensweise bringt einige Vorteile mit sich. Darunter eine gute Performance. Der Zugriff auf Daten in einer \gls{kvDB} ist in $\mathcal{O}(1)$ gegeben. Das Einfügen und Löschen von Datensätzen ist ebenfalls performant. Hierbei ist eine Komplexität von $\mathcal{O}(\log{(N)})$ gegeben (vgl. \cite{keyValueComp}, S.6). 
-\\Ein weiterer Vorteil ist die einfache Skalierbarkeit. Die Partitionierung ist aufgrund des einfachen Modells leicht zu bewerkstelligen (vgl. Abschnitt \ref{sec:Skalierung}).
-\\Ein Nachteil einer \gls{kvDB} ist die rudimentäre Möglichkeit zur Modellierung. In vielen Anwendungsfällen ist es nötig ein Schema zu definieren. Dies ist bei \gls{kvDB} oft nicht effizient umsetzbar (vgl. \cite{1}, S.226)
+Bei der Speicherung von Daten wird aus dem Schlüssel ein \gls{hash} berechnet. Mithilfe von diesem wird entschieden, auf welchem Shard der Schlüssel gespeichert wird \newline(vgl. \autoref{sec:Skalierung}).
+\\Diese Vorgehensweise bringt einige Vorteile mit sich. Darunter eine gute Performance. Der Zugriff auf Daten in einer \gls{kvDB} ist in $\mathcal{O}(1)$ gegeben. Das Einfügen und Löschen von Datensätzen ist ebenfalls performant. Hierbei ist eine Komplexität von $\mathcal{O}(\log{(n)})$ gegeben (vgl. \cite{keyValueComp}, S.6). 
+\\Ein weiterer Vorteil ist die einfache Skalierbarkeit. Die Partitionierung ist aufgrund des einfachen Modells leicht zu bewerkstelligen (vgl. \autoref{sec:Skalierung}).
+
+Ein Nachteil einer \gls{kvDB} ist die rudimentäre Möglichkeit zur Modellierung. In vielen Anwendungsfällen ist es nötig, ein Schema zu definieren. Dies ist bei \gls{kvDB} oft nicht effizient umsetzbar (vgl. \cite{1}, S.226)

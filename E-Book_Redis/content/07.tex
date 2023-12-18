@@ -2,14 +2,14 @@
 
 \subsection{Persistenz}
 \label{sec:Persistenz}
-Um das Problem der fehlenden Persistenz zu lösen, bietet Redis verschiedene Möglichkeiten an.
-Eine dieser Möglichkeiten wird als \ac{RDB} bezeichnet \cite{Redis-Docs-Persistenz}. 
+Um das Problem der fehlenden Persistenz zu lösen, bietet \acs{Redis} verschiedene Möglichkeiten an.
+Eine dieser Möglichkeiten wird als \ac{RDB} bezeichnet (vgl. \cite{Redis-Docs-Persistenz}). 
 Demzugrunde liegt ein Snapshot-Verfahren, bei dem der aktuelle Zustand der Datenbank in regelmäßigen Abständen in einer Datei auf einer Festplatte gespeichert wird.
 Diese regelmäßigen Abstände können bei der Konfiguration der Datenbank festgelegt werden. 
-Bei einem Ausfall der Datenbank kann diese Datei dann wieder schnell eingelesen werden oder falls nötig auch auf einen anderen Server übertragen werden.
+Bei einem Ausfall der Datenbank kann diese Datei wieder schnell eingelesen werden oder falls nötig auch auf einen anderen Server übertragen werden.
 
-Eine weitere Möglichkeit ist das sogenannte \ac{AOF} \cite{Redis-Docs-Persistenz}. 
-Dabei handelt es sich um eine Log-Datei, in der alle Änderungen an der Datenbank in Form von Änderungs-Befehlen auf einer Festplatte gespeichert werden.
+Eine weitere Möglichkeit ist das sogenannte \ac{AOF} (vgl. \cite{Redis-Docs-Persistenz}). 
+Dabei handelt es sich um eine Log-Datei, in der alle Änderungen an der Datenbank in Form von Änderungsbefehlen auf einer Festplatte gespeichert werden.
 
 Da eine solche Log-Datei theoretisch mit jedem weiteren Befehl wachsen würde und so unendlich groß werden könnte, gibt es einen Mechanismus, der dies verhindert.
 Dabei wird in regelmäßigen Abständen ein neuer Ausgangszustand der Datenbank gespeichert, von dem aus eine neue Log-Datei aufgebaut wird. 
@@ -20,10 +20,10 @@ Durch diesen Mechanismus wird garantiert, dass sich die Größe einer Log-Datei 
 Auch hier gibt es die Möglichkeit, die Häufigkeit der Speicherung festzulegen. Es kann zwischen der Standardmäßigen \textit{Every-Second}-Option, der \textit{Every-Change}-Option und der \textit{No}-Option gewählt werden.
 
 Im Vergleich zur \acs{RDB}-Methode benötigt die \acs{AOF}-Methode tendenziell mehr Speicherplatz und kann besonders während des Aufbaus einer neuen Log-Datei zu einer höheren \acs{RAM}-Auslastung führen, was die Performance der Datenbank beeinträchtigen kann.
-Zusätzlich kann man auch beide genannte Optionen kombinieren \cite{Redis-Docs-Persistenz}.
+Zusätzlich kann man auch beide genannte Optionen kombinieren (vgl. \cite{Redis-Docs-Persistenz}).
 
 Abhängig von den Daten, die im System gespeichert werden, muss die Häufigkeit der Absicherung festgelegt werden.
-Dabei gilt es immer einen Kompromiss zwischen Sicherheit und Geschwindigkeit zu finden.
+Dabei gilt es immer, einen Kompromiss zwischen Sicherheit und Geschwindigkeit zu finden.
 Denn je häufiger eine Datensicherung durchgeführt wird, desto mehr Ressourcen des Rechners werden dafür benötigt und desto langsamer wird die Datenbank tendenziell.
-Wenn also ein Datenverslust z.B für die letzten Sekunden in Kauf genommen werden kann, dann kann die Häufigkeit der Datensicherung entsprechend angepasst werden.
+Wenn also ein Datenverslust (z.B. für die letzten Sekunden) in Kauf genommen werden kann, dann ist es möglich, die Häufigkeit der Datensicherung entsprechend angepasst werden.
 

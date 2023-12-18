@@ -7,7 +7,7 @@
 
 Es gibt keine offizielle Unterstützung für \textit{Windows} (vgl. \cite{Redis-Docs-Intro}). Allerdings ist es möglich, \ac{WSL2} auf \textit{Windows} zu installieren. Damit können \textit{Linux}-Binärdateien auf \textit{Windows} ausgeführt werden (vgl. \cite{Redis-Docs-Install-W}). Alternativ kann auch \textit{Ubuntu} auf \textit{Windows} virtualisiert werden. Es existieren unoffizielle \ac{Redis}-Versionen für \textit{Windows}, die allerdings nicht der Produktionsqualität entsprechen, von Versionen für \textit{Linux} oder \textit{macOS} (vgl. \cite{4}, S.16). 
 
-Für die Installation gibt es zwei Möglichkeiten. Entweder man installiert nur \ac{Redis} oder den \ac{Redis}-Stack (vgl. \cite{Redis-Docs-Install-R-or-RS}). Der \ac{Redis}-Stack erweitert den standard \ac{Redis}-Download um folgende Features (vgl. \cite{Redis-Docs-Redis-Stack}):
+Für die Installation gibt es zwei Möglichkeiten. Entweder wird nur \ac{Redis} oder der \ac{Redis}-Stack installiert (vgl. \cite{Redis-Docs-Install-R-or-RS}). Der \ac{Redis}-Stack erweitert den standard \ac{Redis}-Download um folgende Features (vgl. \cite{Redis-Docs-Redis-Stack}):
 
 \begin{itemize}
 	\item \ac{JSON}
@@ -17,7 +17,7 @@ Für die Installation gibt es zwei Möglichkeiten. Entweder man installiert nur 
 \end{itemize}
 
 \ac{JSON}, \textit{Time Series} und \textit{Bloom Filter} sind \ac{Redis}-spezifische Datentypen, die in \autoref{subsec:datentypen} erklärt werden. \textit{Search and Query} ist eine Reihe an Möglichkeiten, um einfache und effiziente Abfragen an den \ac{Redis}-Server zu stellen (vgl. \cite{Redis-Docs-Search-Query}). Beispielsweise ist mit \textit{Search and Query} eine simple Indexierung von \ac{JSON}-Objekten möglich (vgl. \cite{Redis-Docs-Search-Query}). Ebenfalls kann der Nutzer damit Aggregationen durchführen, wie z.B. das Gruppieren oder Sortieren von Abfrageergebnissen (vgl. \cite{Redis-Docs-Aggregation}).  
-
+\newpage
 Unter \textit{Linux} lassen sich \ac{Redis} oder der \ac{Redis}-Stack über einen der folgenden Terminal- befehle installieren:
 
 \texttt{sudo apt-get install redis}

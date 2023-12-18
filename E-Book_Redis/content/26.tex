@@ -5,11 +5,11 @@
 In diesem Abschnitt geht es darum, welche Funktionalitäten die Anwendung dem Nutzer bietet.
 
 Zunächst besteht die Möglichkeit, einen neuen Benutzer anzulegen. Dabei gibt man einen Namen, eine E-Mail und ein Passwort ein.
-Dieser werden anschließend in der Datenbank gespeichert. Um zu verhindern, dass Passwörter im Klartext in der Datenbank abliegen, werden diese zuvor gehasht.
+Diese werden anschließend in der Datenbank gespeichert. Um zu verhindern, dass Passwörter als Klartext in der Datenbank abliegen, werden diese zuvor gehasht.
 Während dieses Prozesses wird dem Benutzer ein zufälliges Profilbild zugewiesen.
 
 Sollte der Benutzer bereits einen Account haben, kann er sich mit Mail und Passwort anmelden.
-Anschließend wird er auf die Startseite weitergeleitet. Dort sieht er eine Übersicht mit allen verfügbaren Chaträumen mit anderen registrierten Usern.
+Anschließend wird er auf die Startseite weitergeleitet. Dort sieht er eine Übersicht mit allen verfügbaren Chaträumen.
 
 Klickt der Benutzer nun auf einen der Chaträume, sieht er die Nachrichtenhistorie des Raumes. Außerdem kann er eine neue Nachricht verfassen und abschicken.
-Diese wird dann in der Datenbank gespeichert und mittels \acs{Pub/Sub} an den anderen Chatteilnehmer gesendet.
+Diese wird dann zum Einen in der Datenbank gespeichert und zum Anderen mittels \acs{Pub/Sub} an den anderen Chatteilnehmer in Echtzeit gesendet.

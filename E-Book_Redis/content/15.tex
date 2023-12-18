@@ -1,40 +1,40 @@
 %!TEX root = ../dokumentation.tex
 
 \section{Bezug zum CAP-Theorem}
-\acs{Redis} wurde in erster Lineie als \textit{In-Memory-Cache} konzipiert, um atomare Operationen auf einem einzelnen Server zu unterstützen (vgl. \cite{nosql} S.82).
-Clustering Optionen sind in Redis erst bei späteren Versionen hinzugekommen.
-\\
-Betrachtet man die ursprüngliche Implementierung und den Grundgedanken \acs{Redis} als \textit{In-Memory-Cache} auf einem einzelnen Server laufen zu lassen, kann man \acs{Redis} als \textit{CA-system} im Rahmen des \textit{CAP-Theorems} einordnen (vgl. \cite{nosql} S.82).
+\acs{Redis} wurde in erster Linie als \textit{In-Memory-Cache} konzipiert, um atomare Operationen auf einem einzelnen Server zu unterstützen (vgl. \cite{nosql} S.82).
+Clustering Optionen sind in \acs{Redis} erst bei späteren Versionen hinzugekommen.
+
+Betrachtet man die ursprüngliche Implementierung und den Grundgedanken \acs{Redis} als \textit{In-Memory-Cache} auf einem einzelnen Server laufen zu lassen, kann man \acs{Redis} als \textit{CA-system} im Rahmen des \textit{\ac{CAP}-Theorems} einordnen (vgl. \cite{nosql} S.82).
 Somit ist Redis in der Lage die \textit{Concistency} und die \textit{Availability} zu gerantieren. Zu beachten ist, dass die \textit{Partition Tolerance} im Ursprünlichen Design keine Rolle spielt, da \acs{Redis} nur aus einer Instanz ausgeführt wird. 
-Die Einordnung einer einzigen \acs{Redis} Instanz ins \textit{CAP-Theorem} ist jedoch nicht besonders aussagekräftig, da dieses für die Einteilung von verteilten Datenbanksystemen vorgesehen ist.
+Die Einordnung einer einzigen \acs{Redis} Instanz ins \textit{\acs{CAP}-Theorem} ist jedoch nicht besonders aussagekräftig, da dieses für die Einteilung von verteilten Datenbanksystemen vorgesehen ist.
 
 \subsection{Redis-Cluster}
-Redis-Cluster ist eine Möglichkeit \acs{Redis} so zu konfigurieren, dass es als verteiltes Datenbanksystem genutzt werden kann. 
-\\
-Redis-Cluster wird als hochperformante horizontale Skalierung von Redis beschrieben (vgl. \cite{Redis-Cluster-Spec}). Redis Cluster sind dabei nach der bekannten Cluster Struktur aufgabaut. Die Datenreplikation ist hierbei asynchron, da das Schreiben der Daten auf die \textit{Replika-Knoten} nicht zum selben Zeitpunkt stattfindet, wie auf dem Master-Knoten.
-\\
-Diese Konfiguration ist laut dem Entwickler Salvatore Sanfilippo eher Konsistent, statt Verfügbar (vgl. \cite{nosql} S.83).
-\\
-Um Konsistenz zu wahren werden im Redis Cluster verschiedene Abläufe berücksichtigt. Die aktuellstsen Daten befinden sich zu jeder Zeit auf dem Master-Knoten des Systems. Durch asynchrone Replikation der Daten, werden die Daten des Master-Knoten nacheinander auf die Replikata-Knoten überschrieben, um diese auf den neusten Datenstand zu bringen (vgl. \cite{Redis-Cluster-Spec}).
+\acs{Redis}-Cluster ist eine Möglichkeit \acs{Redis} so zu konfigurieren, dass es als verteiltes Datenbanksystem genutzt werden kann. 
+
+\acs{Redis}-Cluster wird als hochperformante horizontale Skalierung von \acs{Redis} beschrieben (vgl. \cite{Redis-Cluster-Spec}). \acs{Redis}-Cluster sind dabei nach der bekannten Cluster Struktur aufgebaut. Die Datenreplikation ist hierbei asynchron, da das Schreiben der Daten auf die \textit{Replika-Knoten} nicht zum selben Zeitpunkt stattfindet, wie auf dem Master-Knoten.
+\newpage
+Diese Konfiguration ist laut dem Entwickler \textit{Salvatore Sanfilippo} eher konsistent, als verfügbar (vgl. \cite{nosql} S.83).
+
+Um Konsistenz zu wahren, werden im \acs{Redis}-Cluster verschiedene Abläufe berücksichtigt. Die aktuellsten Daten befinden sich zu jeder Zeit auf dem Master-Knoten des Systems. Durch asynchrone Replikation der Daten, werden die Daten des Master-Knotens nacheinander auf die Replikata-Knoten überschrieben, um diese auf den neusten Datenstand zu bringen (vgl. \cite{Redis-Cluster-Spec}).
 Jedoch gibt es bei dieser Konfiguration Szenarien, welche den Verlust von write-Befehlen verursachen.
-Wird ein write-Befehl von einem Client and einen Master-Knoten ausgeführt und bestätigt, könnten die Daten diese write-Befehls dennoch verloren gehen. Wenn die Verbindung von Master zu Replika ausfällt, bevor die Daten übertragen werden können, ist der write-Befehl für immer verloren. Grund für den Verlust der Daten ist die Ernennung eines neuen Master-Knotens, welcher den Datenstand der Replika-Knoten besitzt (vgl. \cite{Redis-Cluster-Spec}).
-\\
-Verfügbarkeit im Redis-Cluster wird versucht durch den ständigen Austausch der Knoten untereinander zu bewahren. Im Cluster sind alle Knoten untereinander über den Cluster-Bus vernetzt und kommunizieren über ein \textit{Gossip-Protokoll}. Diese Kommunikation stellt sicher, dass alle Konten verfügbar sind. Ist ein Konten nicht erreichbar, so kann das System erkennen, dass es sich um einen Ausfall handelt und bietet die Möglichkeit manuell den Master zu ersetzen (vgl. \cite{Redis-Cluster-Spec}).
-\\
-Partitionen innerhalb eines Systems werden geduldet unter der Vorasusetzung, dass die Mehrheit der Master-Knoten erreichbar ist und Zugriff auf mindestens einen Replika-Knoten haben (vgl. \cite{Redis-Cluster-Spec}). Hat ein Master keine Replika Knoten zur Verfügung, so wird ein benachbarter Master einen seiner Replika-Knoten abgeben.
-\\
-Die Aussage von Sanfillipo, dass Redis-Cluster eher CP, anstatt AP ist, kann durch die genannten Aspekte teilweise bestätigt werden. Konsistenz kann in den meisten Fällen garantiert werden, jedoch existieren Szenarien die zu einem Verlust der aktuellen Daten führen. Im Aspekt der Verfügbarkeit kann Redis-Cluster Ausfälle erkennen und eventuell lösen, jedoch kann keine hundertprozentige Verfügbarkeit garantiert werden.
+Wird ein write-Befehl von einem Client und einem Master-Knoten ausgeführt und bestätigt, könnten die Daten dieses write-Befehls dennoch verloren gehen. Wenn die Verbindung von Master zu Replika ausfällt, bevor die Daten übertragen werden können, ist der write-Befehl für immer verloren. Grund für den Verlust der Daten ist die Ernennung eines neuen Master-Knotens, welcher den Datenstand der Replika-Knoten besitzt (vgl. \cite{Redis-Cluster-Spec}).
+
+Verfügbarkeit im \acs{Redis}-Cluster wird versucht durch den ständigen Austausch der Knoten untereinander zu bewahren. Im Cluster sind alle Knoten untereinander über den Cluster-Bus vernetzt und kommunizieren über ein \textit{Gossip-Protokoll}. Diese Kommunikation stellt sicher, dass alle Knoten verfügbar sind. Ist ein Knoten nicht erreichbar, so kann das System erkennen, dass es sich um einen Ausfall handelt und bietet die Möglichkeit, manuell den Master zu ersetzen (vgl. \cite{Redis-Cluster-Spec}).
+
+Partitionen innerhalb eines Systems werden geduldet, unter der Voraussetzung, dass die Mehrheit der Master-Knoten erreichbar ist und Zugriff auf mindestens einen Replika-Knoten haben (vgl. \cite{Redis-Cluster-Spec}). Hat ein Master keine Replika-Knoten zur Verfügung, so wird ein benachbarter Master einen seiner Replika-Knoten abgeben.
+
+Die Aussage von \textit{Sanfillipo}, dass \acs{Redis}-Cluster eher \textit{CP}, anstatt \textit{AP} ist, kann durch die genannten Aspekte teilweise bestätigt werden. Konsistenz kann in den meisten Fällen garantiert werden, jedoch existieren Szenarien, die zu einem Verlust der aktuellen Daten führen. Im Aspekt der Verfügbarkeit kann \acs{Redis}-Cluster Ausfälle erkennen und eventuell lösen, jedoch kann keine hundertprozentige Verfügbarkeit garantiert werden.
 
 \subsection{Redis-Sentinel}
-Eine weitere Konfiguration in der \acs{Redis} genutzt werden kann ist Redis-Sentinel. Diese Konfiguration basiert auf dem allgemeinen Master-Slave Prinzip und kann somit als verteiltes System bezeichnet werden. Redis-Sentinel wird genutzt um hohe Verfügbarkeit innerhalb eines Systems zu garantieren. 
-\\
-Redis-Sentinel ist Sentinel-Prozesse in einem verteilten System, welche auf den verschiedenen Redis-instanzen für die Überwachung des Systems zuständig sind. 
-\\
+Eine weitere Konfiguration, in der \acs{Redis} genutzt werden kann, ist \acs{Redis}-Sentinel. Diese Konfiguration basiert auf dem allgemeinen Master-Slave Prinzip und kann somit als verteiltes System bezeichnet werden. \acs{Redis}-Sentinel wird genutzt, um hohe Verfügbarkeit innerhalb eines Systems zu garantieren. 
+
+Auf jeder \acs{Redis}-Instanz sind Sentinel-Prozesse, welche für die Überwachung des Systems zuständig sind. 
+
 Sentinel bietet Monitoring-Services, Benachrichtigungen und \textit{automatic failover} Funktionalitäten an. Beim \textit{automatic failover} kann der Ausfall von Master-Knoten erkannt und automatisch behoben werden (vgl. \cite{Redis-Sentinal}).
-Um einen Ausfall zu melden müssen die verteilten Sentinel-Prozesse innerhalb des Systems zustimmen, dass eine Komponente nicht erreichbar ist. Wenn eine Einigung entsteht und ein Master-Knoten beispielsweise nicht erreichbar ist, wird dieser automatisch durch einen seiner Replikas ersetzt.  Die restlichen Replika-Knoten werden über den neuen Master informiert und passen sich diesem an. Auch die Clients werden schnellstmöglich über den neuen Master informiert und können sich nun an diesen wenden. Sobald der alte Master wieder verfügbar ist, erkennt er den neuen Master und ordnet sich als dessen Replika ein (vgl. \cite{Redis-Sentinal}).
-\\
-Die Möglichkeit den Master-Knoten bei einem möglichen Ausfall automatisch zu ersetzen macht Redis-Sentinel zu einem hochverfügbarem, verteilen System.
-\\
-Solange die Mehrheit der Sentinel-Prozesse im System erreichbar bleiben, werden Partitionen akzeptiert (vgl. \cite{Redis-Sentinal}).
-\\
-Durch die Möglichkeit des \textit{automatic failovers} kann Redis im \textit{CAP-Theorem} als AP System eingestuft werden.
+Um einen Ausfall zu melden, müssen die verteilten Sentinel-Prozesse innerhalb des Systems zustimmen, dass eine Komponente nicht erreichbar ist. Wenn eine Einigung entsteht und ein Master-Knoten beispielsweise nicht erreichbar ist, wird dieser automatisch durch einen seiner Replikas ersetzt.  Die restlichen Replika-Knoten werden über den neuen Master informiert und passen sich diesem an. Auch die Clients werden schnellstmöglich über den neuen Master informiert und können sich nun an diesen wenden. Sobald der alte Master wieder verfügbar ist, erkennt er den neuen Master und ordnet sich als dessen Replika ein (vgl. \cite{Redis-Sentinal}).
+
+Die Möglichkeit, den Master-Knoten bei einem möglichen Ausfall automatisch zu ersetzen, macht \acs{Redis}-Sentinel zu einem hochverfügbaren, verteilen System.
+
+Solange die Mehrheit der Sentinel-Prozesse im System erreichbar bleibt, werden Partitionen akzeptiert (vgl. \cite{Redis-Sentinal}).
+
+Durch die Möglichkeit des \textit{automatic failovers} kann Redis im \textit{\acs{CAP}-Theorem} als \textit{AP} System eingestuft werden.
